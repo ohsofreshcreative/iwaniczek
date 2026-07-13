@@ -3,8 +3,8 @@
     "file": "assets/pagination-BM43p5Nx.css",
     "src": "_pagination-BM43p5Nx.css"
   },
-  "_pagination-DNLWKolj.js": {
-    "file": "assets/pagination-DNLWKolj.js",
+  "_pagination-dokTp6q1.js": {
+    "file": "assets/pagination-dokTp6q1.js",
     "name": "pagination",
     "css": [
       "assets/pagination-BM43p5Nx.css"
@@ -15,7 +15,7 @@
     "src": "editor.deps.json"
   },
   "resources/css/app.css": {
-    "file": "assets/app-DmcNiLq-.css",
+    "file": "assets/app-BmFDPU5q.css",
     "name": "app",
     "names": [
       "app.css"
@@ -29,7 +29,7 @@
     ]
   },
   "resources/css/editor.css": {
-    "file": "assets/editor-C9-z78jL.css",
+    "file": "assets/editor-CFKN5FHD.css",
     "name": "editor",
     "names": [
       "editor.css"
@@ -50,7 +50,7 @@
     "src": "resources/images/pointer.svg"
   },
   "resources/js/app.js": {
-    "file": "assets/app-CNIS25wh.js",
+    "file": "assets/app-Bi8TPmdR.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -61,34 +61,34 @@
     ]
   },
   "resources/js/blocks/reviews.js": {
-    "file": "assets/reviews-CfOU2URH.js",
+    "file": "assets/reviews-BKD7_WIw.js",
     "name": "reviews",
     "src": "resources/js/blocks/reviews.js",
     "isDynamicEntry": true,
     "imports": [
-      "_pagination-DNLWKolj.js"
+      "_pagination-dokTp6q1.js"
     ],
     "css": [
       "assets/reviews-_Ms0R5o1.css"
     ]
   },
   "resources/js/blocks/slider.js": {
-    "file": "assets/slider-BHZVj-kH.js",
+    "file": "assets/slider-50Mze6Nd.js",
     "name": "slider",
     "src": "resources/js/blocks/slider.js",
     "isDynamicEntry": true,
     "imports": [
-      "_pagination-DNLWKolj.js"
+      "_pagination-dokTp6q1.js"
     ]
   },
   "resources/js/blocks/tabs.js": {
-    "file": "assets/tabs-B5s4zv4X.js",
+    "file": "assets/tabs-DHLaxzBo.js",
     "name": "tabs",
     "src": "resources/js/blocks/tabs.js",
     "isDynamicEntry": true
   },
   "resources/js/editor.js": {
-    "file": "assets/editor-DRWDEw-3.js",
+    "file": "assets/editor-Dqo-zVGR.js",
     "name": "editor",
     "src": "resources/js/editor.js",
     "isEntry": true
