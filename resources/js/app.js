@@ -40,15 +40,46 @@ document.addEventListener('DOMContentLoaded', function () {
 	bannerButtons.forEach((btn) => {
 		btn.addEventListener('click', (e) => {
 			e.preventDefault();
-			const parentSection = btn.closest('section, .hero, .category-header, .hero-blog');
-			if (parentSection) {
-				const nextSection = parentSection.nextElementSibling;
-				if (nextSection) {
-					nextSection.scrollIntoView({
-						behavior: 'smooth',
-						block: 'start'
-					});
-				}
+			
+			// Znajdź sekcję lub główny kontener nadrzędny przycisku
+			let parentSection = btn.closest('section, .hero, .category-header, .hero-blog');
+			if (!parentSection) return;
+
+			// Jeśli sekcja jest owinięta w kontener bloków gutenberga (np. wp-block-acf-...),
+			// znajdź najwyższy kontener bloku znajdujący się bezpośrednio w głównym obszarze roboczym (np. main, #app itp.)
+			let current = parentSection;
+			while (current.parentElement && 
+				   current.parentElement.tagName.toLowerCase() !== 'main' && 
+				   current.parentElement.id !== 'app' && 
+				   !current.parentElement.classList.contains('entry-content')) {
+				current = current.parentElement;
+			}
+			
+			// Próbujemy pobrać następny element po najwyższym kontenerze lub po bezpośredniej sekcji nadrzędnej
+			let nextSection = current.nextElementSibling || parentSection.nextElementSibling;
+			
+			// Jeśli nie znaleźliśmy następnego elementu tą drogą (np. z powodu specyficznej struktury DOM),
+			// wykonujemy niezawodne wyszukiwanie pierwszej sekcji położonej poniżej przycisku
+			if (!nextSection) {
+				const sections = Array.from(document.querySelectorAll('section, [data-gsap-anim="section"], .b-contact-block, .__posts, .__content, .prose'));
+				const btnY = btn.getBoundingClientRect().top + window.scrollY;
+				nextSection = sections.find(sec => {
+					const secY = sec.getBoundingClientRect().top + window.scrollY;
+					return secY > btnY + 50; // 50px marginesu zabezpieczającego
+				});
+			}
+
+			if (nextSection) {
+				// Uwzględniamy wysokość przyklejonego nagłówka (.fixed-top)
+				const header = document.querySelector('header.fixed-top');
+				const headerHeight = header ? header.offsetHeight : 0;
+				const elementPosition = nextSection.getBoundingClientRect().top;
+				const offsetPosition = elementPosition + window.scrollY - headerHeight;
+
+				window.scrollTo({
+					top: offsetPosition,
+					behavior: 'smooth'
+				});
 			}
 		});
 	});
