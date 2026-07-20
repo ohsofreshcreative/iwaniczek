@@ -1499,11 +1499,6 @@
           "color": "rgb(var(--p-500))"
         },
         {
-          "name": "Primary (700)",
-          "slug": "primary-700",
-          "color": "rgb(var(--p-700))"
-        },
-        {
           "name": "Primary (900)",
           "slug": "primary-900",
           "color": "rgb(var(--p-900))"
@@ -1567,11 +1562,6 @@
           "name": "Primary (Light)",
           "slug": "primary-light",
           "color": "var(--color-primary-300)"
-        },
-        {
-          "name": "Primary (Lighter)",
-          "slug": "primary-lighter",
-          "color": "var(--color-primary-100)"
         }
       ]
     },
