@@ -82,13 +82,14 @@ const initReviewsSwiper = (scope = document) => {
     new Swiper(swiperEl, {
       modules: [Navigation, Pagination],
       slidesPerView: 1.2,
+	  autoHeight: false,
       spaceBetween: 24,
       loop: true,
       pagination: { el: swiperEl.querySelector('.swiper-pagination'), clickable: true },
       navigation: { nextEl: swiperEl.querySelector('.__next'), prevEl: swiperEl.querySelector('.__prev') },
       breakpoints: {
         768: { slidesPerView: 2.5, spaceBetween: 24 },
-        1024: { slidesPerView: 3.8, spaceBetween: 24 },
+        1024: { slidesPerView: 3.2, spaceBetween: 24 },
       },
       on: {
         // Uruchom logikę popupa po załadowaniu i zmianie slajdu

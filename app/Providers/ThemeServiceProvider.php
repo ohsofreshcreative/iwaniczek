@@ -45,6 +45,7 @@ class ThemeServiceProvider extends SageServiceProvider
 					'capability' => 'edit_posts',
 					'redirect'   => false,
 				]);
+				
 			}
 		});
 	}

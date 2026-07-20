@@ -3,10 +3,10 @@ use App\Walkers\DropdownWalker;
 use App\Walkers\MobileDropdownWalker;
 @endphp
 
-<header x-data="{ mobileOpen: false }" class="relative top-0 z-50 bg-white masthead fixed-top">
+<header x-data="{ mobileOpen: false }" class="relative top-0 z-50 bg-secondary-400 masthead fixed-top">
 
 	<!-- Desktop Header -->
-	<div class="items-center justify-between hidden h-full py-4 px-12 mx-auto md:flex">
+	<div class="items-center justify-between hidden h-full py-4 px-12 mx-auto md:flex ">
 		<a class="brand shrink-0" href="{{ home_url('/') }}">
 			@if ($logo)
 			<img src="{{ $logo['url'] }}" alt="{{ $logo['alt'] ?? 'Logo' }}" class="w-auto h-12">
@@ -26,12 +26,6 @@ use App\Walkers\MobileDropdownWalker;
 		</nav>
 		@endif
 
-
-		<div class="">
-			<a href="/kontakt/" class="block w-full btn btn-secondary">
-				Kontakt
-			</a>
-		</div>
 	</div>
 
 	<!-- Mobile Header Bar -->
@@ -97,11 +91,7 @@ use App\Walkers\MobileDropdownWalker;
 			</nav>
 			@endif
 
-			<div class="mt-8">
-				<a href="/kontakt/" class="block w-full btn btn-secondary">
-					Kontakt
-				</a>
-			</div>
+	
 		</div>
 
 	</div>

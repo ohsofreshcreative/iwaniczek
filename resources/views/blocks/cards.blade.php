@@ -27,12 +27,12 @@
 
 		<div class="grid {{ $gridClass }} gap-8 mt-10">
 			@foreach ($r_cards as $item)
-			<div data-gsap-element="card" class="__card relative bg-white p-8">
+			<div data-gsap-element="card" class="__card relative bg-gray p-8">
 				@if (!empty($item['image']['url']))
-				<img class="mb-6" src="{{ $item['image']['url'] }}" alt="{{ $item['image']['alt'] ?? '' }}" />
+				<img class="mb-6 w-10 h-auto" src="{{ $item['image']['url'] }}" alt="{{ $item['image']['alt'] ?? '' }}" />
 				@endif
 				@if (!empty($item['title']))
-				<p class="text-h5">{{ $item['title'] }}</p>
+				<p class="text-h6">{{ $item['title'] }}</p>
 				@endif
 				@if (!empty($item['text']))
 				<p>{{ $item['text'] }}</p>

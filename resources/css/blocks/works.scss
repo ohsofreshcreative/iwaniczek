@@ -1,0 +1,17 @@
+.portfolio-filters-slider {
+	width: 100%;
+	overflow: hidden;
+
+	.swiper-wrapper {
+		display: flex;
+		align-items: center;
+	}
+
+	.swiper-slide {
+		width: auto !important;
+		flex-shrink: 0;
+	}
+	.btn{
+		padding: 16px 24px !important;
+	}
+}

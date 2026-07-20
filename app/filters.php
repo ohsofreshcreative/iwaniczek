@@ -49,3 +49,37 @@ add_filter('woocommerce_coming_soon_template', function ($template) {
     
     return $template;
 });
+
+/**
+ * Dodaje listę „Formaty” do paska ACF WYSIWYG.
+ */
+add_filter('acf/fields/wysiwyg/toolbars', function ($toolbars) {
+    if (!isset($toolbars['Full'])) {
+        return $toolbars;
+    }
+
+    // Pierwszy rząd przycisków.
+    if (!in_array('styleselect', $toolbars['Full'][1], true)) {
+        array_unshift($toolbars['Full'][1], 'styleselect');
+    }
+
+    return $toolbars;
+});
+
+/**
+ * Dodaje własne formaty tekstowe do TinyMCE.
+ */
+add_filter('tiny_mce_before_init', function ($settings) {
+    $styleFormats = [
+        [
+            'title' => 'Kolor wyróżniający',
+            'inline' => 'span',
+            'classes' => 'text-accent',
+            'wrapper' => false,
+        ],
+    ];
+
+    $settings['style_formats'] = wp_json_encode($styleFormats);
+
+    return $settings;
+});

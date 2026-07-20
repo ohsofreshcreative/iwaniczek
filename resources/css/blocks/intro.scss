@@ -1,0 +1,11 @@
+.b-intro {
+	.__txt{
+		p {
+			padding-bottom: 16px;
+			display: inline-block;
+		}
+
+		p:last-child {
+			margin-bottom: 0 !important;
+		}
+	}}

@@ -1504,6 +1504,11 @@
           "color": "rgb(var(--p-700))"
         },
         {
+          "name": "Primary (900)",
+          "slug": "primary-900",
+          "color": "rgb(var(--p-900))"
+        },
+        {
           "name": "Secondary",
           "slug": "secondary",
           "color": "rgb(var(--secondary))"
@@ -1524,6 +1529,11 @@
           "color": "rgb(var(--s-300))"
         },
         {
+          "name": "Secondary (400)",
+          "slug": "secondary-400",
+          "color": "rgb(var(--s-400))"
+        },
+        {
           "name": "Secondary (500)",
           "slug": "secondary-500",
           "color": "rgb(var(--s-500))"
@@ -1532,6 +1542,16 @@
           "name": "Secondary (600)",
           "slug": "secondary-600",
           "color": "rgb(var(--s-600))"
+        },
+        {
+          "name": "Accent (Dark)",
+          "slug": "accent-dark",
+          "color": "rgb(var(--accent-dark))"
+        },
+        {
+          "name": "Gray",
+          "slug": "gray",
+          "color": "var(--gray)"
         },
         {
           "name": "Action",

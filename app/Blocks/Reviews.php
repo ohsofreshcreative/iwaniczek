@@ -6,71 +6,56 @@ use Log1x\AcfComposer\Block;
 use StoutLogic\AcfBuilder\FieldsBuilder;
 use App\Support\SectionClasses;
 
+
 class Reviews extends Block
 {
 	public $name = 'Slider - Opinie';
-	public $description = 'reviews';
+	public $description = 'Globalny slider opinii';
 	public $slug = 'reviews';
 	public $category = 'formatting';
 	public $icon = 'format-quote';
-	public $keywords = ['reviews', 'kafelki'];
+	public $keywords = ['reviews', 'opinie'];
+
 	public $mode = 'edit';
+
 	public $supports = [
 		'align' => false,
-		'mode' => false,
+		'mode' => true,
 		'jsx' => true,
+		'anchor' => true,
+		'customClassName' => true,
 	];
+
 
 	public function fields()
 	{
 		$reviews = new FieldsBuilder('reviews');
-
 		$reviews
-			->setLocation('block', '==', 'acf/reviews') // ważne!
+			->setLocation('block', '==', 'acf/reviews')
 			->addText('block-title', [
-				'label' => 'Tytuł',
-				'required' => 0,
+				'label' => 'Tytuł lokalny',
 			])
 			->addAccordion('accordion1', [
 				'label' => 'Slider - Opinie',
 				'open' => false,
 				'multi_expand' => true,
 			])
-			/*--- FIELDS ---*/
-			->addTab('Treści', ['placement' => 'top'])
-			->addGroup('g_reviews', ['label' => ''])
-			->addText('title', ['label' => 'Tytuł'])
-			->addWysiwyg('text', ['label' => 'Opis', 'media_upload' => 0, 'tabs' => 'visual'])
-			->endGroup()
-
-			/*--- OPINIE ---*/
-
-			->addTab('Opinie', ['placement' => 'top'])
-			->addRepeater('r_reviews', [
-				'label' => 'Slider - Opinie',
-				'layout' => 'table', // 'row', 'block', albo 'table'
-				'min' => 1,
-				'max' => 15,
-				'button_label' => 'Dodaj kafelek'
+			->addTab('Informacja', [
+				'placement' => 'top'
 			])
-			->addTextarea('txt', [
-				'label' => 'Opis',
-				'rows' => 4,
-				'new_lines' => 'br',
-			])
-			->addText('name', [
-				'label' => 'Klient',
-			])
-			->endRepeater()
-
+			->addMessage(
+				'info',
+				'Treści opinii edytujesz globalnie w zakładce "Opinie globalne".'
+			)
 			/*--- USTAWIENIA BLOKU ---*/
-
-			->addTab('Ustawienia bloku', ['placement' => 'top'])
+			->addTab('Ustawienia bloku', [
+				'placement' => 'top'
+			])
 			->addText('section_id', [
-				'label' => 'ID',
+				'label' => 'ID'
 			])
 			->addText('section_class', [
-				'label' => 'Dodatkowe klasy CSS',
+				'label' => 'Dodatkowe klasy CSS'
 			])
 			->addTrueFalse('wide', [
 				'label' => 'Szeroka kolumna',
@@ -87,7 +72,7 @@ class Reviews extends Block
 			->addSelect('background', [
 				'label' => 'Kolor tła',
 				'choices' => [
-					'none' => 'Brak (domyślne)',
+					'none' => 'Brak',
 					'section-white' => 'Białe',
 					'section-light' => 'Jasne',
 					'section-gray' => 'Szare',
@@ -96,40 +81,28 @@ class Reviews extends Block
 					'section-dark' => 'Ciemne',
 				],
 				'default_value' => 'none',
-				'ui' => 0, // Ulepszony interfejs
-				'allow_null' => 0,
 			]);
-
-		return $reviews;
+		return $reviews->build();
 	}
-
 	public function with(): array
 	{
 		$fields = [
-			'g_reviews' => get_field('g_reviews'),
-			'r_reviews' => get_field('r_reviews'),
-
+			// GLOBALNE DANE
+			'g_reviews' => get_field('g_reviews', 'option') ?: [],
+			'r_reviews' => get_field('r_reviews', 'option') ?: [],
+			// LOKALNE USTAWIENIA BLOKU
 			'section_id' => get_field('section_id'),
 			'section_class' => get_field('section_class'),
-
-			'flip' => (bool) get_field('flip'),
 			'wide' => (bool) get_field('wide'),
 			'nomt' => (bool) get_field('nomt'),
-
 			'background' => get_field('background') ?: 'none',
-		];
 
+		];
 		$fields['sectionClass'] = SectionClasses::fromMap($fields, [
-			'flip' => 'order-flip',
 			'wide' => 'wide',
 			'nomt' => '!mt-0',
 		]);
-
 		return $fields;
 	}
-
-	public function enqueue()
-	{
-		// Pozostaw tę metodę pustą.
-	}
+	public function enqueue() {}
 }
