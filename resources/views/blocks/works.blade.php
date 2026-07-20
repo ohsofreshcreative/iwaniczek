@@ -20,7 +20,7 @@ $sectionClass .= ' ' . $background;
 		@if(!empty($posts))
 		@if(!empty($categories) && !is_wp_error($categories))
 		<div class="portfolio-filters-slider swiper mb-10">
-			<div class="swiper-wrapper">
+			<div class="swiper-wrapper ml-4 my-4">
 				<div class="swiper-slide">
 					<button
 						class="portfolio-filter active btn-outline-primary btn whitespace-nowrap"

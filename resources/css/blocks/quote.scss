@@ -3,31 +3,35 @@
 		p {
 			font-size: 18px;
 			font-weight: 400 !important;
-			
+
 		}
+
 		p:last-child {
-			margin-left:40px;
+			margin-left: 40px;
 		}
 
 		blockquote {
 			position: relative;
-			display: flex;
-			gap: 8px;
+			display: block;
 			margin-bottom: 40px;
 			font-size: 24px;
 			letter-spacing: 0.18px;
 			margin-left: 0 !important;
 
 			&::before {
-				content: url('@images/quote.svg');
-				position: relative;
-				left: 0;
-				top: -6px;
-				width: 14px;
-				height: 14px;
+				content: "";
+				display: block;
+				float: left;
+				width: 44px;
+				height: 36px;
+				background-image: url('@images/quote.svg');
 				background-size: contain;
 				background-repeat: no-repeat;
 				background-position: center;
+				margin-left: 40px;
+				margin-right: 10px;
+				margin-top: -12px;
+
 			}
 		}
 	}

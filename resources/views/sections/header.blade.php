@@ -3,10 +3,10 @@ use App\Walkers\DropdownWalker;
 use App\Walkers\MobileDropdownWalker;
 @endphp
 
-<header x-data="{ mobileOpen: false }" class="relative top-0 z-50 bg-secondary-400 masthead fixed-top">
+<header x-data="{ mobileOpen: false }" class="fixed top-0 left-0 right-0 z-50 masthead fixed-top bg-transparent ">
 
 	<!-- Desktop Header -->
-	<div class="items-center justify-between hidden h-full py-4 px-12 mx-auto md:flex ">
+	<div class=" items-center justify-between hidden h-full py-4 px-12 mx-auto lg:flex border-b  border-dashed border-secondary-400">
 		<a class="brand shrink-0" href="{{ home_url('/') }}">
 			@if ($logo)
 			<img src="{{ $logo['url'] }}" alt="{{ $logo['alt'] ?? 'Logo' }}" class="w-auto h-12">
@@ -29,7 +29,7 @@ use App\Walkers\MobileDropdownWalker;
 	</div>
 
 	<!-- Mobile Header Bar -->
-	<div class="flex items-center justify-between p-4 mobile-menu fixed-top md:hidden">
+	<div class="flex items-center justify-between p-4 mobile-menu fixed-top lg:hidden">
 		<a class="brand shrink-0" href="{{ home_url('/') }}">
 			@if ($logo)
 			<img src="{{ $logo['url'] }}" alt="{{ $logo['alt'] ?? 'Logo' }}" class="w-auto h-12">
@@ -39,7 +39,7 @@ use App\Walkers\MobileDropdownWalker;
 		</a>
 		<button
 			@click.stop="mobileOpen = !mobileOpen"
-			class="p-2 primary bg-white rounded-md"
+			class="p-2 primary  rounded-md"
 			aria-expanded="mobileOpen"
 			aria-controls="mobile-menu-panel">
 			<span class="sr-only">Otwórz menu główne</span>
@@ -64,7 +64,7 @@ use App\Walkers\MobileDropdownWalker;
 		x-transition:leave="transition ease-in duration-150"
 		x-transition:leave-start="opacity-100 transform translate-x-0"
 		x-transition:leave-end="opacity-0 transform translate-x-full"
-		class="mobile-menu fixed top-0 right-0 bottom-0 w-full h-full bg-primary shadow-xl z-[51] overflow-y-auto md:hidden"
+		class="mobile-menu fixed top-0 right-0 bottom-0 w-full h-full bg-secondary shadow-xl z-[51] overflow-y-auto lg:hidden"
 		aria-label="Menu mobilne">
 		<div class="p-4 relative z-10">
 			<div class="flex items-center justify-between mb-6">

@@ -95,9 +95,9 @@ body {
 /*--- !ROOT ---*/
 
 :root {
-	--header: "din-2014", sans-serif;
-	--txt: "din-2014", sans-serif;
-	--btns-font: "din-2014", sans-serif;
+	--header: "Exo", sans-serif;
+	--txt: "Open Sans", sans-serif;
+	--btns-font: "Open Sans", sans-serif;
 
 	--smt: 104px;
 	--spt: 104px;
@@ -638,6 +638,55 @@ h6,
 	color: #000;
 }
 
+.btn-primary-lines {
+    position: relative;
+    background-color: var(--color-primary-500);
+    border: 1px solid transparent !important; 
+    color: #000;
+    border-radius: 0 !important; 
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        bottom: -1px;
+        left: -12px; 
+        right: -12px;
+        border-top: 1px solid var(--color-primary-500);
+        border-bottom: 1px solid var(--color-primary-500);
+        pointer-events: none;
+        transition: border-color 0.2s ease-out;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: -12px; 
+        bottom: -12px;
+        left: -1px;
+        right: -1px;
+        border-left: 1px solid var(--color-primary-500);
+        border-right: 1px solid var(--color-primary-500);
+        pointer-events: none;
+        transition: border-color 0.2s ease-out;
+    }
+
+    &:hover {
+        background-color: var(--color-primary-hover);
+        color: #000;
+
+        &::before {
+            border-top-color: var(--color-primary-hover);
+            border-bottom-color: var(--color-primary-hover);
+        }
+
+        &::after {
+            border-left-color: var(--color-primary-hover);
+            border-right-color: var(--color-primary-hover);
+        }
+    }
+}
 .btn-secondary {
 	background-color: var(--color-secondary);
 	border-color: var(--color-secondary);
@@ -702,23 +751,64 @@ h6,
 	margin-left: 12px;
 }
 
+
 .btn-outline-primary {
-	background-color: transparent;
-	border-color: var(--color-primary);
-	color: var(--color-primary);
+    position: relative;
+    background-color: transparent;
+    border: 1px solid transparent !important; 
+    color: var(--color-primary);
+    border-radius: 0 !important; 
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        bottom: -1px;
+        left: -12px; 
+        right: -12px;
+        border-top: 1px solid var(--color-primary);
+        border-bottom: 1px solid var(--color-primary);
+        pointer-events: none;
+        transition: border-color 0.2s ease-out;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: -12px;
+        bottom: -12px;
+        left: -1px; 
+        right: -1px;
+        border-left: 1px solid var(--color-primary);
+        border-right: 1px solid var(--color-primary);
+        pointer-events: none;
+        transition: border-color 0.2s ease-out;
+    }
+    &.active,
+    &:hover {
+        background-color: var(--color-primary);
+        color: #000;
+
+        &::before {
+            border-top-color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        &::after {
+            border-left-color: var(--color-primary);
+            border-right-color: var(--color-primary);
+        }
+    }
 }
 
-.btn-outline-primary:hover {
-	background-color: var(--color-primary);
-	color: #fff;
-}
+
+
 
 .btn-outline-secondary {
 	background-color: transparent;
 	border-color: var(--color-secondary);
 	color: var(--color-secondary);
 }
-
 .btn-outline-secondary:hover {
 	background-color: var(--color-secondary-hover);
 	color: #fff;
@@ -1348,9 +1438,7 @@ footer {
 		margin-bottom: 0px;
 	}
 
-	.footer_widget:first-child {
-		margin-bottom: 48px !important;
-	}
+
 
 	.menu {
 		max-height: 0;

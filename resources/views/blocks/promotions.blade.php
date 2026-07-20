@@ -30,7 +30,7 @@
 
 				<div class="relative z-10">
 					@if (!empty($item['title']))
-					<h3 class="text-h5 mb-8"> {!! wp_kses_post($item['title']) !!}</h3>
+					<h3 class="text-h5 mb-4"> {!! wp_kses_post($item['title']) !!}</h3>
 					@endif
 
 					@if (!empty($item['text']))
@@ -63,7 +63,7 @@
 
 				<div class="relative z-10">
 					@if (!empty($item['title']))
-					<h3 class="text-h5 mb-8"> {!! wp_kses_post($item['title']) !!}</h3>
+					<h3 class="text-h5 mb-4"> {!! wp_kses_post($item['title']) !!}</h3>
 					@endif
 
 					@if (!empty($item['text']))

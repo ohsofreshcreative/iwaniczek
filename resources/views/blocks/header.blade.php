@@ -27,11 +27,12 @@ $sectionClass .= $nomt ? ' !mt-0' : '';
 					{!! $g_header['text'] !!}
 				</div>
 
-				<a href="#header-next"
+				<a href="#banner-next"
 					aria-label="Przewiń do następnej sekcji"
-					class="js-header-next rotate-90 bg-primary h-16 w-16 flex items-center justify-center pointer-events-auto  cursor-pointer transition-all duration-400 animate-bounce ">
-					<x-icon.arrow-right class="__arrow text-black w-4 h-auto overflow-visible" />
+					class="js-banner-next bg-primary h-16 w-16 flex items-center justify-center pointer-events-auto  cursor-pointer transition-all duration-400 animate-bounce ">
+					<x-icon.arrow-bottom class="__arrow text-black w-4 h-auto overflow-visible" />
 				</a>
 			</div>
 		</div>
+	</div>
 </section>

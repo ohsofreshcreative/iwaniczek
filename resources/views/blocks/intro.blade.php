@@ -4,7 +4,7 @@
     data-gsap-anim="section"
     @if(!empty($section_id)) id="{{ $section_id }}" @endif
     @class([
-        'b-intro relative -smt overflow-hidden',
+        'b-intro relative -spt -spb overflow-hidden bg-[#18191B;]',
         $sectionClass => filled($sectionClass),
         $section_class => filled($section_class),
         $background => filled($background) && $background !== 'none',
@@ -81,5 +81,7 @@
 
 </div>
     </div>
+@if(!is_page('o-nas') && !is_page('about'))
 <img src="/wp-content/uploads/2026/07/header.png" class="absolute inset-0 z-0 w-full " />
+@endif
 </section>

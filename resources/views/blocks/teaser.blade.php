@@ -19,7 +19,7 @@ $sectionClass .= $nomt ? ' !mt-0' : '';
 	background-position: center;
 ">
 		<div class="__inside c-main relative">
-			<div class="__content w-full md:max-w-2xl md:px-16 px-8">
+			<div class="__content w-full md:max-w-2xl md:px-16 px-0">
 				<h3 data-gsap-element="header" class=" !text-h6 !color-primary">
 					{!! $g_teaser['header'] !!}
 				</h3>

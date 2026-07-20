@@ -180,6 +180,10 @@
 	--gradient-light: linear-gradient(-90deg, #0E3A2D 0%, #0A533D 100%);
 	--gradient-s: linear-gradient(-90deg, #DE855D 0%, #D37A51 100%);
 
+	/* fonts */
+	--font-exo: "Exo", sans-serif;
+	--font-montserrat: "Montserrat", sans-serif;
+	--font-open-sans: "Open Sans", sans-serif;
 }
 
 @import '../css/variables.scss';
@@ -215,7 +219,7 @@
 @import '../css/blocks/map.scss';
 @import '../css/blocks/image.scss';
 @import '../css/blocks/teaser.scss';
-
+@import '../css/blocks/featured.scss';
 
 
 /*-- NOT USED ---*/

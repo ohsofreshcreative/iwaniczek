@@ -35,6 +35,24 @@ Alpine.start();
 /*--- SKRYPTY URUCHAMIANE PO ZAŁADOWANIU STRONY ---*/
 
 document.addEventListener('DOMContentLoaded', function () {
+	// Płynne przewijanie do następnej sekcji dla przycisków .js-banner-next
+	const bannerButtons = document.querySelectorAll('.js-banner-next');
+	bannerButtons.forEach((btn) => {
+		btn.addEventListener('click', (e) => {
+			e.preventDefault();
+			const parentSection = btn.closest('section, .hero, .category-header, .hero-blog');
+			if (parentSection) {
+				const nextSection = parentSection.nextElementSibling;
+				if (nextSection) {
+					nextSection.scrollIntoView({
+						behavior: 'smooth',
+						block: 'start'
+					});
+				}
+			}
+		});
+	});
+
 	// Inicjalizacja baguetteBox.js dla galerii
 	if (document.querySelector('.lightbox-gallery')) {
 		baguetteBox.run('.lightbox-gallery');

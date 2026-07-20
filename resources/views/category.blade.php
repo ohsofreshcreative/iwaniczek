@@ -49,26 +49,20 @@ $unique_id = 'clip_'.uniqid();
 			</h2>
 		
 		</div>
-		<a href="#banner-next"
+          <a href="#banner-next"
 					aria-label="Przewiń do następnej sekcji"
 					class="js-banner-next bg-primary h-16 w-16 flex items-center justify-center pointer-events-auto  cursor-pointer transition-all duration-400 animate-bounce ">
 					<x-icon.arrow-bottom class="__arrow text-black w-4 h-auto overflow-visible" />
 				</a>
 		</div>
 	</div>
-
 </div>
-
-
-
 @if (have_posts())
 <div class="__posts c-main !mt-10 posts grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 	@while (have_posts()) @php(the_post())
-
 	@includeFirst(['partials.content-' . get_post_type(), 'partials.content'])
 	@endwhile
 </div>
-
 {{-- {!! get_the_posts_navigation() !!} --}}
 {!! the_posts_pagination() !!}
 @else
@@ -79,9 +73,7 @@ $unique_id = 'clip_'.uniqid();
 	</div>
 </div>
 @endif
-
 <!-- bottom-block -->
-
 <section data-gsap-anim="section" @if(!empty($section_id)) id="{{ $section_id }}" @endif class="b-contact-block relative -smt text-white{{ $sectionClass }} {{ $section_class }}">
 		<div class="__wrapper c-main relative z-20">
 			@if(is_page('kontakt') && !empty($title))
@@ -91,7 +83,6 @@ $unique_id = 'clip_'.uniqid();
 @endif
 		<div class="relative grid grid-cols-1 lg:grid-cols-2 items-center gap-6 md:gap-10 z-10">
 			<div class="__content flex flex-col justify-between gap-6 md:gap-8">
-
 				@if (!empty($g_contact_1['image']))
 				<div data-gsap-element="img" class="__img  h-60">
 					<img class="w-full h-full object-cover" src="{{ $g_contact_1['image']['url'] }}" alt="{{ $g_contact_1['image']['alt'] ?? '' }}">

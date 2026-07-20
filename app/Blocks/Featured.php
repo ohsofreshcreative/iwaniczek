@@ -6,72 +6,52 @@ use Log1x\AcfComposer\Block;
 use StoutLogic\AcfBuilder\FieldsBuilder;
 use App\Support\SectionClasses;
 
-class Promotions extends Block
+class Featured extends Block
 {
-	public $name = 'Promocje';
-	public $description = 'promotions';
-	public $slug = 'promotions';
+	public $name = 'Wyróżnione Realizacje';
+	public $description = 'featured - wyróżnione realizacje';
+	public $slug = 'featured';
 	public $category = 'formatting';
-	public $icon = 'ellipsis';
-	public $keywords = ['promotions', 'promocje', 'kafelki'];
+	public $icon = 'grid-view';
+	public $keywords = ['portfolio', 'realizacje', 'siatka', 'featured', 'projekty'];
 	public $mode = 'edit';
 	public $supports = [
 		'align' => false,
 		'mode' => true,
 		'jsx' => true,
+		'anchor' => true,
+		'customClassName' => true,
 	];
 
 	public function fields()
 	{
-		$promotions = new FieldsBuilder('promotions');
+		$featured = new FieldsBuilder('featured');
 
-		$promotions
-			->setLocation('block', '==', 'acf/promotions') // ważne!
+		$featured
+			->setLocation('block', '==', 'acf/featured')
 			->addText('block-title', [
-				'label' => 'Tytuł',
+				'label' => 'Tytuł sekcji',
 				'required' => 0,
+				'default_value' => 'Nasze realizacje',
 			])
 			->addAccordion('accordion1', [
-				'label' => 'Promocje - kafelki',
-				'open' => false,
+				'label' => 'Wyróżnione realizacje',
+				'open' => true,
 				'multi_expand' => true,
 			])
-			/*--- TAB #1 ---*/
-			->addTab('Treści', ['placement' => 'top'])
-			->addGroup('g_promotions', ['label' => ''])
-			->addText('header', ['label' => 'Nagłówek'])
-			->endGroup()
 
-			/*--- TAB #2 ---*/
-			->addTab('Kafelki', ['placement' => 'top'])
-			->addRepeater('r_promotions', [
-				'label' => 'Kafelki',
-				'layout' => 'table', // 'row', 'block', albo 'table'
-				'min' => 1,
-				'button_label' => 'Dodaj kafelek'
+			/*--- TREŚĆ ---*/
+			->addTab('Treść', ['placement' => 'top'])
+			->addRelationship('selected_posts', [
+				'label' => 'Wybierz realizacje',
+				'instructions' => 'Wybierz realizacje, które mają być wyświetlane w tym bloku.',
+				'post_type' => ['portfolio'],
+				'filters' => ['search', 'taxonomy'],
+				'return_format' => 'object',
+				'required' => 1,
 			])
-			->addImage('image', [
-				'label' => 'Obraz',
-				'return_format' => 'array', // lub 'url', lub 'id'
-				'preview_size' => 'thumbnail',
-			])
-				->addWysiwyg('title', [
-				'label' => 'Tytuł',
-				'tabs' => 'all', // 'visual', 'text', 'all'
-				'toolbar' => 'full', // 'basic', 'full'
-				'media_upload' => true,
-			])
-			->addTextarea('text', [
-				'label' => 'Opis',
-			])
-			->addLink('button', [
-				'label' => 'Przycisk',
-				'return_format' => 'array',
-			])
-			->endRepeater()
 
 			/*--- USTAWIENIA BLOKU ---*/
-
 			->addTab('Ustawienia bloku', ['placement' => 'top'])
 			->addText('section_id', [
 				'label' => 'ID',
@@ -98,7 +78,7 @@ class Promotions extends Block
 				'ui_off_text' => 'Nie',
 			])
 			->addTrueFalse('gap', [
-				'label' => 'Większy odstęp',
+				'label' => 'Większy odstęp między kafelkami',
 				'ui' => 1,
 				'ui_on_text' => 'Tak',
 				'ui_off_text' => 'Nie',
@@ -114,33 +94,30 @@ class Promotions extends Block
 					'section-gradient' => 'Gradient',
 					'section-dark' => 'Ciemne',
 				],
-				'default_value' => 'none',
-				'ui' => 0, // Ulepszony interfejs
+				'default_value' => 'section-dark',
+				'ui' => 0,
 				'allow_null' => 0,
 			]);
 
-		return $promotions;
+		return $featured;
 	}
 
 	public function with(): array
 	{
 		$fields = [
-			'g_promotions' => get_field('g_promotions'),
-			'r_promotions' => get_field('r_promotions'),
-
+			'block_title' => get_field('block-title'),
+			'posts' => array_slice(get_field('selected_posts') ?: [], 0, 3),
 			'section_id' => get_field('section_id'),
 			'section_class' => get_field('section_class'),
-
 			'flip' => (bool) get_field('flip'),
 			'wide' => (bool) get_field('wide'),
 			'nomt' => (bool) get_field('nomt'),
 			'gap' => (bool) get_field('gap'),
-
 			'background' => get_field('background') ?: 'none',
 		];
 
 		$fields['sectionClass'] = SectionClasses::fromMap($fields, [
-			'flip' => 'order-flip',
+			'flip' => 'grid-flip',
 			'wide' => 'wide',
 			'nomt' => '!mt-0',
 			'gap' => 'wider-gap',

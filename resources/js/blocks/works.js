@@ -18,7 +18,7 @@ const worksFilters = () => {
 						FreeMode
 					],
 					slidesPerView: 'auto',
-					spaceBetween: 24,
+					spaceBetween: 34,
 					freeMode: {
 						enabled: true,
 					},

@@ -5,7 +5,7 @@ $sectionClass = '';
 $sectionClass .= $flip ? ' order-flip' : '';
 $sectionClass .= $wide ? ' wide' : '';
 $sectionClass .= $nomt ? ' !mt-0' : '';
-$sectionClass .= $gap ? ' wider-gap' : '';
+$sectionClass .= $gap ? '   wider-gap' : '';
 
 if (!empty($background) && $background !== 'none') {
 $sectionClass .= ' ' . $background;
