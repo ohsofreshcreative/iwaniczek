@@ -36,10 +36,10 @@ $unique_id = 'clip_'.uniqid();
 <div
     class="absolute inset-0"
     style="
-        background:
-            linear-gradient(180deg, rgba(24, 25, 27, 0.95) 4%, rgba(24, 25, 27, 0) 32%),
-            linear-gradient(180deg, rgba(24, 25, 27, 0) 0%, #18191B 100%),
-            linear-gradient(0deg, rgba(24, 25, 27, 0.30) 0%, rgba(24, 25, 27, 0.30) 100%);
+background:
+    linear-gradient(180deg, rgba(24, 25, 27, 0.95) 4%, rgba(24, 25, 27, 0) 32%),
+    linear-gradient(180deg, rgba(24, 25, 27, 0) 0%, #18191B 100%),
+    linear-gradient(0deg, rgba(24, 25, 27, 0.30) 0%, rgba(24, 25, 27, 0.30) 100%);
     "
 ></div>
 	<div class="__wrapper c-main relative z-10 pt-60 pb-26">

@@ -13,14 +13,15 @@
 		style="background-image: url('{{ $g_hero['image']['url'] }}');">
 	</div>
 	@endif
-	<div
-		class="absolute top-0 inset-0 w-full min-h-[600px] bg-top-center bg-cover bg-no-repeat z-20 pointer-events-none"
-		style="background-image: url('/wp-content/uploads/2026/07/bg.png');">
-	</div>
-	<div class="absolute -top-40 -left-20 w-[140%] min-h-[450px] h-full overflow-hidden z-25 pointer-events-none opacity-60">
-		<img
-			src="/wp-content/uploads/2026/07/lines.png"
-			class="absolute w-full h-full object-cover top-0 left-0 rotate-45" />
+	<div class="absolute top-0 inset-0 w-full min-h-[600px] z-20 pointer-events-none">
+		<div
+			class="absolute inset-0 bg-top-center bg-cover bg-no-repeat"
+			style="background-image: url('/wp-content/uploads/2026/07/bg.png');">
+		</div>
+		<div
+			class="absolute inset-0 bg-top-center bg-cover bg-no-repeat opacity-60 rotate"
+			style="background-image: url('/wp-content/uploads/2026/07/line.svg'); mask-image: url('/wp-content/uploads/2026/07/bg.png'); mask-size: cover; mask-position: top center; mask-repeat: no-repeat; -webkit-mask-image: url('/wp-content/uploads/2026/07/bg.png'); -webkit-mask-size: cover; -webkit-mask-position: top center; -webkit-mask-repeat: no-repeat;">
+		</div>
 	</div>
 	<div class="__wrapper c-main flex flex-col-reverse md:grid md:grid-cols-2 mt-10 relative gap-10 z-30 pt-40 md:min-h-[650px]">
 		<div class="__box flex flex-col items-start md:self-end">
