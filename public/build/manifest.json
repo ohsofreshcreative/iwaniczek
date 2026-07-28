@@ -45,7 +45,7 @@
     "src": "editor.deps.json"
   },
   "resources/css/app.css": {
-    "file": "assets/app-BniaHvZ4.css",
+    "file": "assets/app-BLAWCJUV.css",
     "name": "app",
     "names": [
       "app.css"
@@ -63,7 +63,7 @@
     ]
   },
   "resources/css/editor.css": {
-    "file": "assets/editor-N8uKo45T.css",
+    "file": "assets/editor-B2_RGG7w.css",
     "name": "editor",
     "names": [
       "editor.css"
@@ -100,7 +100,7 @@
     "src": "resources/images/s_phone.svg"
   },
   "resources/js/app.js": {
-    "file": "assets/app-BjN64NoX.js",
+    "file": "assets/app-uvk9Agkp.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -112,8 +112,15 @@
       "resources/js/blocks/offer.js",
       "resources/js/blocks/works.js",
       "resources/js/blocks/showroom.js",
+      "resources/js/blocks/hero.js",
       "resources/js/expandable.js"
     ]
+  },
+  "resources/js/blocks/hero.js": {
+    "file": "assets/hero-CcxBzdER.js",
+    "name": "hero",
+    "src": "resources/js/blocks/hero.js",
+    "isDynamicEntry": true
   },
   "resources/js/blocks/offer.js": {
     "file": "assets/offer-GP2aLev8.js",
@@ -126,7 +133,7 @@
     ]
   },
   "resources/js/blocks/portfolio.js": {
-    "file": "assets/portfolio-CYiHb8hz.js",
+    "file": "assets/portfolio-CrNh1Mvg.js",
     "name": "portfolio",
     "src": "resources/js/blocks/portfolio.js",
     "isDynamicEntry": true,
@@ -136,7 +143,7 @@
     ]
   },
   "resources/js/blocks/reviews.js": {
-    "file": "assets/reviews-Cc8_pbeu.js",
+    "file": "assets/reviews-CbuzXpbz.js",
     "name": "reviews",
     "src": "resources/js/blocks/reviews.js",
     "isDynamicEntry": true,

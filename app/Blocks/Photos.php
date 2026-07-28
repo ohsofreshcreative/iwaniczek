@@ -41,7 +41,19 @@ class Photos extends Block
 			/*--- FIELDS ---*/
 			->addTab('Galeria', ['placement' => 'top'])
 			->addGroup('g_photos', ['label' => ''])
-			->addGallery('photos', [
+			->addImage('image1', [
+				'label' => 'Obraz #1',
+				'return_format' => 'array',
+				'preview_size' => 'thumbnail',
+			])
+			->addText('header1', ['label' => 'Nagłówek'])
+			->addWysiwyg('text1', [
+				'label' => 'Treść',
+				'tabs' => 'all',
+				'toolbar' => 'full',
+				'media_upload' => true,
+			])
+			->addGallery('photos', [ 
 				'label' => 'Galeria',
 				'preview_size' => 'medium',
 				'library' => 'all',

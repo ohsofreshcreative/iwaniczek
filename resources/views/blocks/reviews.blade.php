@@ -42,6 +42,14 @@
 					@endforeach
 				</div>
 			</div>
+			<div data-gsap-element="arrows" class="flex items-center gap-4 mt-8">
+<div class="__prev bg-primary h-16 w-16 flex items-center justify-center pointer-events-auto cursor-pointer transition-all duration-400">
+	<x-icon.arrow-left class="__arrow text-black w-4 h-auto overflow-visible" />
+					</div>
+					<div class="__next bg-primary h-16 w-16 flex items-center justify-center pointer-events-auto  cursor-pointer transition-all duration-400">
+	<x-icon.arrow-right class="__arrow text-black w-4 h-auto overflow-visible" />
+					</div>
+				</div>
 		</div>
 	</div>
 	<div id="review-popup" class="review-popup fixed inset-0 bg-black/50 bg-opacity-70 z-[999] flex items-center justify-center p-4 hidden">

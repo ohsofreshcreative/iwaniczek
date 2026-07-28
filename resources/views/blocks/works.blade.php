@@ -55,7 +55,7 @@ $sectionClass .= ' ' . $background;
 					<img
 						src="{{ get_the_post_thumbnail_url($item->ID, 'large') }}"
 						alt="{{ get_the_title($item->ID) }}"
-						class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-103" />
+						class="w-full h-full max-h-60 object-cover transition-transform duration-500 group-hover:scale-103" />
 				</div>
 				@endif
 				<h3 class="text-primary-500 text-h6 mb-4">

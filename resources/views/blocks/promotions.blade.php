@@ -3,7 +3,7 @@
 <section
 	data-gsap-anim="section"
 	@if(!empty($section_id)) id="{{ $section_id }}" @endif
-	@class([ 'b-promotions relative -smt' ,
+	@class([ 'b-promotions relative -smt  -spt -spb' ,
 	$sectionClass=> filled($sectionClass),
 	$section_class => filled($section_class),
 	$background => filled($background) && $background !== 'none',
@@ -25,15 +25,17 @@
 				@if(!empty($item['image']['url']))
 				style="background-image:url('{{ $item['image']['url'] }}')"
 				@endif>
-				<div class="absolute inset-0 bg-[linear-gradient(90deg,_#18191B_0%,_rgba(24,25,27,0.24)_100%)]"></div>
-
+<div 
+    class="absolute inset-0 bg-cover bg-center"
+    style="background-image: linear-gradient(90deg, rgba(26, 28, 31, 1) 0%, rgba(26, 28, 31, 0.24) 100%);, url('/image.jpg');">
+</div>
 				<div class="relative z-10">
 					@if (!empty($item['title']))
-					<h3 class="text-h5 mb-4"> {!! wp_kses_post($item['title']) !!}</h3>
+					<h3 class="text-h5 mb-2"> {!! wp_kses_post($item['title']) !!}</h3>
 					@endif
 
 					@if (!empty($item['text']))
-					<p class="pb-4">{{ $item['text'] }}</p>
+					<p class="pb-8">{{ $item['text'] }}</p>
 					@endif
 					@if (!empty($item['button']))
 					<x-button
@@ -58,15 +60,18 @@
 				@if(!empty($item['image']['url']))
 				style="background-image:url('{{ $item['image']['url'] }}')"
 				@endif>
-				<div class="absolute inset-0 bg-[linear-gradient(90deg,_#18191B_0%,_rgba(24,25,27,0.24)_100%)]"></div>
+<div 
+    class="absolute inset-0 bg-cover bg-center"
+    style="background-image: linear-gradient(90deg, rgba(26, 28, 31, 1) 0%, rgba(26, 28, 31, 0.24) 100%);, url('/image.jpg');">
+</div>
 
 				<div class="relative z-10">
 					@if (!empty($item['title']))
-					<h3 class="text-h5 mb-4"> {!! wp_kses_post($item['title']) !!}</h3>
+					<h3 class="text-h5 mb-2"> {!! wp_kses_post($item['title']) !!}</h3>
 					@endif
 
 					@if (!empty($item['text']))
-					<p class="pb-4">{{ $item['text'] }}</p>
+					<p class="pb-8">{{ $item['text'] }}</p>
 					@endif
 					@if (!empty($item['button']))
 					<x-button

@@ -22,10 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (document.querySelector('.b-offer')) import('./blocks/offer');
 	if (document.querySelector('.b-works')) import('./blocks/works');
 	if (document.querySelector('.b-showroom')) import('./blocks/showroom');
+	if (document.querySelector('.b-hero')) import('./blocks/hero');
 	if (document.querySelector('[data-expandable]')) import('./expandable');
 
 });
- 
+
 /*--- NOT USED ---*/
 
 /*--- INICJALIZACJA BIBLIOTEK ---*/
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	bannerButtons.forEach((btn) => {
 		btn.addEventListener('click', (e) => {
 			e.preventDefault();
-			
+
 			// Znajdź sekcję lub główny kontener nadrzędny przycisku
 			let parentSection = btn.closest('section, .hero, .category-header, .hero-blog');
 			if (!parentSection) return;
@@ -49,16 +50,16 @@ document.addEventListener('DOMContentLoaded', function () {
 			// Jeśli sekcja jest owinięta w kontener bloków gutenberga (np. wp-block-acf-...),
 			// znajdź najwyższy kontener bloku znajdujący się bezpośrednio w głównym obszarze roboczym (np. main, #app itp.)
 			let current = parentSection;
-			while (current.parentElement && 
-				   current.parentElement.tagName.toLowerCase() !== 'main' && 
-				   current.parentElement.id !== 'app' && 
-				   !current.parentElement.classList.contains('entry-content')) {
+			while (current.parentElement &&
+				current.parentElement.tagName.toLowerCase() !== 'main' &&
+				current.parentElement.id !== 'app' &&
+				!current.parentElement.classList.contains('entry-content')) {
 				current = current.parentElement;
 			}
-			
+
 			// Próbujemy pobrać następny element po najwyższym kontenerze lub po bezpośredniej sekcji nadrzędnej
 			let nextSection = current.nextElementSibling || parentSection.nextElementSibling;
-			
+
 			// Jeśli nie znaleźliśmy następnego elementu tą drogą (np. z powodu specyficznej struktury DOM),
 			// wykonujemy niezawodne wyszukiwanie pierwszej sekcji położonej poniżej przycisku
 			if (!nextSection) {

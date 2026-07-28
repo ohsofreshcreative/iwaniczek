@@ -139,7 +139,7 @@ body {
 }
 
 .c-main {
-	max-width: 1376px !important;
+	max-width: 1536px !important;
 	margin: 0 auto;
 	padding-left: 24px !important;
 	padding-right: 24px !important;
@@ -358,7 +358,9 @@ body {
 
 .section-gray {
 	background: var(--color-gray);
-	padding: var(--smt) 0;
+	  padding: var(--spt) 0 var(--spb);
+
+	
 
 	h1,
 	.text-h1,
@@ -521,7 +523,20 @@ h6,
 	font-family: var(--header);
 	font-weight: 600;
 }
-
+h1 p,
+h1 span,
+h2 p,
+h2 span,
+h3 p,
+h3 span,
+h4 p,
+h4 span,
+h5 p,
+h5 span,
+h6 p,
+h6 span {
+	font-family: var(--header);
+}
 .text-gradient {
 	background-image: linear-gradient(90deg, #025391 0%, #3FB9C1 100%);
 	-webkit-background-clip: text;

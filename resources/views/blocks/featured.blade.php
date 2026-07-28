@@ -2,14 +2,14 @@
 <section
 	data-gsap-anim="section"
 	@if(!empty($section_id)) id="{{ $section_id }}" @endif
-	@class([ 'b-featured -smt  relative' ,
+	@class([ 'b-featured -spt relative' ,
 	$sectionClass=> filled($sectionClass),
 	$section_class => filled($section_class),
 	$background => filled($background) && $background !== 'none',
 	])>
 
 
-    <div class="c-main">
+    <div class="c-main ">
         
         @if(!empty($block_title))
             <h2 class="header-line m-header">

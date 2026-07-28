@@ -9,7 +9,8 @@
 	$background => filled($background) && $background !== 'none',
 	])>
 
-	<div class="__wrapper c-main relative">
+	<div class="__wrapper c-main relative bg-gray overflow-hidden">
+	<div class="absolute blur bg-primary right-[-305px] bottom-[-936px] w-[1105px] h-[1105px] rounded-full opacity-10 blur-[75px]"></div>
 		<div class="__col grid grid-cols-1 lg:grid-cols-[1fr_2fr] items-center gap-8 lg:gap-12">
 			@if (!empty($g_quote['image']))
 			<div data-gsap-element="img" class="__img lg:h-140 order1">

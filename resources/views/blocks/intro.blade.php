@@ -4,14 +4,14 @@
     data-gsap-anim="section"
     @if(!empty($section_id)) id="{{ $section_id }}" @endif
     @class([
-        'b-intro relative -spt -spb overflow-hidden bg-[#18191B;]',
+        'b-intro relative -spt  overflow-hidden ',
         $sectionClass => filled($sectionClass),
         $section_class => filled($section_class),
         $background => filled($background) && $background !== 'none',
     ])>
 
     <div class="__wrapper c-main relative z-1">
-<div class="__col grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-stretch">
+<div class="__col grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-stretch">
 
     @if (!empty($g_intro['image']))
         <div data-gsap-element="img" class="__img order1 self-start ">
@@ -58,12 +58,12 @@
 
 
         @if (!empty($g_intro['r_intro']))
-            <div class="__features mt-12 space-y-4" data-gsap-element="features">
+            <div class="__features  space-y-4" data-gsap-element="features">
                 @foreach ($g_intro['r_intro'] as $item)
                     @if (!empty($item['title']))
                         <div class="flex items-center gap-4">
                             @if (!empty($item['number']))
-                                <span class="text-xl text-secondary-400 font-semibold">
+                                <span class="text-xl text-secondary-400 font-semibold font-header">
                                     {{ $item['number'] }}
                                 </span>
                             @endif

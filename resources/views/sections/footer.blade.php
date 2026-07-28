@@ -21,7 +21,7 @@ $footer_background = get_field('footer_background', 'option');
 	<div class="relative z-10 c-main px-6 ">
 
 
-		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 footer-py">
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-8 footer-py">
 			<div class="flex flex-col gap-3">
 						<div>
 				@if(!empty($logo_footer))
@@ -90,8 +90,8 @@ $footer_background = get_field('footer_background', 'option');
 		@endfor
 	</div>
 	<div class="footer-bottom border-t border-primary-900 w-full ">
-		<div class="flex flex-col md:flex-row justify-between items-center gap-6 py-10">
-			<p>
+		<div class="flex flex-col md:flex-row justify-center items-center gap-6 py-10">
+			<p class="md:border-r border-primary-900 pr-4 md:pr-6 text-center md:text-left">
 				Copyright ©{{ date('Y') }}
 				{{ get_bloginfo('name') }}.
 				All Rights Reserved.

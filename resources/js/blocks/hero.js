@@ -1,36 +1,46 @@
-document.addEventListener('alpine:init', () => {
-  window.Alpine.data('msCurrencyCalc', (locations = []) => ({
-    locations,
-    mode: 'buy',
-    locationSlug: locations[0]?.slug ?? '',
-    currencyCode: locations[0]?.rates?.[0]?.code ?? '',
-    amount: 100,
+document.addEventListener('DOMContentLoaded', () => {
+console.log('JS działa!');
+    const playBtn = document.getElementById('heroPlayBtn');
+    const modal = document.getElementById('heroVideoModal');
+    const closeBtn = document.getElementById('heroVideoClose');
+    const video = document.getElementById('heroModalVideo');
 
-    get currentLocation() {
-      return this.locations.find((l) => l.slug === this.locationSlug) || null;
-    },
-    get currentRates() {
-      return this.currentLocation?.rates ?? [];
-    },
-    get currentRow() {
-      return this.currentRates.find((r) => r.code === this.currencyCode) || null;
-    },
-    get rate() {
-      if (!this.currentRow) return 0;
-      return this.mode === 'buy' ? this.currentRow.sell : this.currentRow.buy;
-    },
-    get formattedResult() {
-      const v = (Number(this.amount) || 0) * this.rate;
-      return v.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    },
+    if (!playBtn || !modal || !video) return;
 
-    init() {
-      this.$watch('locationSlug', () => {
-        const codes = this.currentRates.map((r) => r.code);
-        if (!codes.includes(this.currencyCode)) {
-          this.currencyCode = codes[0] ?? '';
+    playBtn.addEventListener('click', () => {
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+
+        video.currentTime = 0;
+        video.play();
+
+        document.body.classList.add('overflow-hidden');
+    });
+
+    function closeModal() {
+
+        video.pause();
+        video.currentTime = 0;
+
+        modal.classList.remove('flex');
+        modal.classList.add('hidden');
+
+        document.body.classList.remove('overflow-hidden');
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', e => {
+        if (e.target === modal) {
+            closeModal();
         }
-      });
-    },
-  }));
+    });
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+
 });

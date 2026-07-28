@@ -30,7 +30,7 @@ $sectionClass .= ' ' . $background;
 				$excerpt = get_the_excerpt($post->ID);
 				@endphp
 				<div class="swiper-slide">
-					<div class="relative h-100 md:h-180 overflow-hidden group">
+					<div class="relative h-100 md:h-164 overflow-hidden group">
 						@if($image)
 						<img
 							src="{{ $image }}"

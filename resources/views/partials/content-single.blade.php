@@ -24,7 +24,7 @@ $sectionClass .= $flip ? ' order-flip' : '';
 <section data-gsap-anim="section" class="hero-blog relative overflow-visible" style="background-image: url('/wp-content/uploads/2026/07/blog-single.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(24, 25, 27, 0.95) 4%, rgba(24, 25, 27, 0) 32%), linear-gradient(180deg, rgba(24, 25, 27, 0) 0%, #18191B 100%), linear-gradient(0deg, rgba(24, 25, 27, 0.30) 0%, rgba(24, 25, 27, 0.30) 100%);"></div>
     <div class="__wrapper c-main relative z-10 md:pt-60 md:pb-26 py-20">
-        <div class="__content w-full sm:w-3/4 mx-auto pb-30">
+        <div class="__content w-full sm:w-3/4  pb-30">
             <div class="__top mt-20">
                 <h1 data-gsap-element="header" class="text-h2 text-white my-6">{{ get_the_title() }}</h1>
           <a href="#banner-next"
@@ -69,17 +69,17 @@ foreach ($matches as $match) {
 $toc .= '</ul></nav>';
 @endphp
 
-
 <div class="__content c-main __entry -smt grid grid-cols-1 md:grid-cols-[1fr_2.5fr] gap-12 relative z-10 -mt-20">
-    <div class="relative md:sticky top-0 md:top-10 self-start pt-4 order-2 md:order-none">
+    <div class="relative md:sticky top-0 md:top-10 self-start pt-4 order-3 md:order-none">
         <p class="text-h5 m-title !text-primary mb-6 font-bold">
             Co znajdziesz w artykule:
         </p>
+
         @if(count($matches))
             {!! $toc !!}
         @endif
     </div>
-    <div id="tresc" class="__entry-content flex flex-col gap-10 md:-mt-30 order-1 md:order-none">
+    <div class="__entry-content flex flex-col gap-10 md:-mt-30 order-1 md:order-none">
         @if(has_post_thumbnail())
             <div data-gsap-element="image" class="w-full img-2xl overflow-hidden -mt-20">
                 {!! get_the_post_thumbnail(get_the_ID(), 'large', [
@@ -87,6 +87,14 @@ $toc .= '</ul></nav>';
                 ]) !!}
             </div>
         @endif
+        <div class="md:hidden">
+            <p class="text-h5 m-title !text-primary mb-6 font-bold">
+                Co znajdziesz w artykule:
+            </p>
+            @if(count($matches))
+                {!! $toc !!}
+            @endif
+        </div>
         <div class="prose max-w-none text-white">
             {!! $content !!}
         </div>
