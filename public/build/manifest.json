@@ -45,7 +45,7 @@
     "src": "editor.deps.json"
   },
   "resources/css/app.css": {
-    "file": "assets/app-BLAWCJUV.css",
+    "file": "assets/app-Cn6yESAY.css",
     "name": "app",
     "names": [
       "app.css"
@@ -63,7 +63,7 @@
     ]
   },
   "resources/css/editor.css": {
-    "file": "assets/editor-B2_RGG7w.css",
+    "file": "assets/editor-BhO0fZaa.css",
     "name": "editor",
     "names": [
       "editor.css"
@@ -100,7 +100,7 @@
     "src": "resources/images/s_phone.svg"
   },
   "resources/js/app.js": {
-    "file": "assets/app-uvk9Agkp.js",
+    "file": "assets/app-j65V74ZU.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -117,7 +117,7 @@
     ]
   },
   "resources/js/blocks/hero.js": {
-    "file": "assets/hero-CcxBzdER.js",
+    "file": "assets/hero-D5xTmCDR.js",
     "name": "hero",
     "src": "resources/js/blocks/hero.js",
     "isDynamicEntry": true
