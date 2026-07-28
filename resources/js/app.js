@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (document.querySelector('.b-offer')) import('./blocks/offer');
 	if (document.querySelector('.b-works')) import('./blocks/works');
 	if (document.querySelector('.b-showroom')) import('./blocks/showroom');
+	if (document.querySelector('[data-expandable]')) import('./expandable');
 
 });
  

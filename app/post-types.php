@@ -1,7 +1,7 @@
 <?php
 
 /*--- CPT - Produkty ---*/
-
+/* 
 add_action('init', function () {
 	register_post_type('product', [
 		'label'         => 'Produkty',
@@ -54,7 +54,7 @@ add_action('init', function () {
 	]);
 });
 
-
+ */
 
 /*--- CPT - Portfolio ---*/
 

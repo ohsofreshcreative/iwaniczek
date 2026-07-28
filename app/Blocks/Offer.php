@@ -41,25 +41,6 @@ class Offer extends Block
 
             ->addText('title', ['label' => 'Tytuł'])
 
-            ->addRepeater('r_offer', [
-                'label' => 'offer',
-                'layout' => 'table', // 'row', 'block', albo 'table'
-                'min' => 1,
-                'max' => 10,
-                'button_label' => 'Dodaj kafelek'
-            ])
-            ->addImage('icon', [
-                'label' => 'Ikonka',
-                'return_format' => 'array',
-                'preview_size' => 'thumbnail',
-            ])
-			 ->addText('number', [
-                'label' => 'Numer',
-            ])
-            ->addText('header', [
-                'label' => 'Nagłówek',
-            ])
-            ->endRepeater()
 
             ->endGroup()
 
@@ -125,7 +106,6 @@ class Offer extends Block
     {
         return [
             'g_offer' => get_field('g_offer'),
-            'offer' => get_field('g_offer')['r_offer'] ?? [],
             'section_id' => get_field('section_id'),
             'section_class' => get_field('section_class'),
             'nolist' => get_field('nolist'),

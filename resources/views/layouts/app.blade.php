@@ -36,15 +36,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 		@yield('content')
 
-		@elseif (function_exists('is_product') && is_product())
+		@elseif (function_exists('is_woocommerce') && (is_product() || is_cart() || is_checkout() || is_account_page()))
 
-		<main id="main" class="main">
+		<main id="main" class="c-main -menu-mt py-10">
 			@yield('content')
 		</main>
 
 		@else
 
-		<main id="main" class="main">
+		<main id="main" class="main -menu-mt">
 			@yield('content')
 		</main>
 

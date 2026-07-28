@@ -45,7 +45,7 @@
     "src": "editor.deps.json"
   },
   "resources/css/app.css": {
-    "file": "assets/app-Co8Eo9kY.css",
+    "file": "assets/app-BniaHvZ4.css",
     "name": "app",
     "names": [
       "app.css"
@@ -63,7 +63,7 @@
     ]
   },
   "resources/css/editor.css": {
-    "file": "assets/editor-DpZFOj-Q.css",
+    "file": "assets/editor-N8uKo45T.css",
     "name": "editor",
     "names": [
       "editor.css"
@@ -100,7 +100,7 @@
     "src": "resources/images/s_phone.svg"
   },
   "resources/js/app.js": {
-    "file": "assets/app-3prwwnEs.js",
+    "file": "assets/app-BjN64NoX.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -111,11 +111,12 @@
       "resources/js/blocks/portfolio.js",
       "resources/js/blocks/offer.js",
       "resources/js/blocks/works.js",
-      "resources/js/blocks/showroom.js"
+      "resources/js/blocks/showroom.js",
+      "resources/js/expandable.js"
     ]
   },
   "resources/js/blocks/offer.js": {
-    "file": "assets/offer-BMvtpozA.js",
+    "file": "assets/offer-GP2aLev8.js",
     "name": "offer",
     "src": "resources/js/blocks/offer.js",
     "isDynamicEntry": true,
@@ -188,5 +189,11 @@
     "name": "editor",
     "src": "resources/js/editor.js",
     "isEntry": true
+  },
+  "resources/js/expandable.js": {
+    "file": "assets/expandable-zaOHAVZg.js",
+    "name": "expandable",
+    "src": "resources/js/expandable.js",
+    "isDynamicEntry": true
   }
 }

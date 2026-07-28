@@ -356,6 +356,43 @@ body {
 	}
 }
 
+.section-gray {
+	background: var(--color-gray);
+	padding: var(--smt) 0;
+
+	h1,
+	.text-h1,
+	h2,
+	.text-h2,
+	h3,
+	.text-h3,
+	h4,
+	.text-h4,
+	h5,
+	.text-h5,
+	h6,
+	.text-h6,
+	p,
+	b,
+	strong,
+	i,
+	ul,
+	ul li,
+	a,
+	.accordion-label,
+	.__txt {
+		color: #fff;
+	}
+
+	.btn-primary {
+		background: var(--color-secondary);
+	}
+
+	.btn-primary:hover {
+		background: var(--color-secondary-hover);
+	}
+}
+
 .section-dark {
 	background: var(--color-secondary);
 	padding: var(--smt) 0;
@@ -890,8 +927,7 @@ h6,
 }
 
 .fixed-top.scrollDown {
-	background-color: var(--color-secondary-400) !important;
-	box-shadow: 0 3px 5px rgba(27, 106, 23, 0.2) !important;
+	background-color: var(--color-secondary) !important;
 }
 
 .fixed-top.scrollDown .nav-link {

@@ -176,7 +176,7 @@
 	--color-secondary-lighter: var(--color-secondary-100);
 
 	--color-muted: var(--color-secondary-500);
-	--gradient: linear-gradient(90deg, #132A23 0%, #0D3F2F 100%);
+	--gradient: linear-gradient(90deg, #222325 0%, #18191B 100%);
 	--gradient-light: linear-gradient(-90deg, #0E3A2D 0%, #0A533D 100%);
 	--gradient-s: linear-gradient(-90deg, #DE855D 0%, #D37A51 100%);
 
@@ -192,6 +192,7 @@
 @import 'swiper/css/navigation';
 @import 'swiper/css/pagination';
 @import 'baguettebox.js/dist/baguetteBox.min.css';
+@import '../css/woocommerce.scss';
 
 /*-- USED ---*/
 @import '../css/blocks/hero.scss';
@@ -220,6 +221,8 @@
 @import '../css/blocks/image.scss';
 @import '../css/blocks/teaser.scss';
 @import '../css/blocks/featured.scss';
+@import '../css/blocks/inspire.scss';
+@import '../css/blocks/bestsellers.scss';
 
 
 /*-- NOT USED ---*/

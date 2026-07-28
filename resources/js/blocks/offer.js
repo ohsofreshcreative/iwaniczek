@@ -15,7 +15,7 @@ const initOfferSlider = () => {
 
         new Swiper(slider, {
             modules: [Navigation],
-            loop: true,
+            loop: false,
             grabCursor: true,
             slidesPerView: 1,
             spaceBetween: 24,

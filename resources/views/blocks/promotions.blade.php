@@ -17,7 +17,6 @@
 		</div>
 
 		@if (!empty($r_promotions))
-<!-- pierwsz dwa  -->
 		<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
 			@foreach (array_slice($r_promotions, 0, 2) as $item)
 			<div
