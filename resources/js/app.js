@@ -327,11 +327,86 @@ function initializeAmeliaBlock($block) {
 }
 
 // Uruchom logikę dla każdego bloku Amelia na stronie edycji
-acf.addAction('ready_field/name=amelia_service', function ($field) {
-	const $block = $field.closest('.acf-block-fields');
-	if ($block.data('amelia-initialized')) return;
-	$block.data('amelia-initialized', true);
-	initializeAmeliaBlock($block);
+if (typeof acf !== 'undefined') {
+	acf.addAction('ready_field/name=amelia_service', function ($field) {
+		const $block = $field.closest('.acf-block-fields');
+		if ($block.data('amelia-initialized')) return;
+		$block.data('amelia-initialized', true);
+		initializeAmeliaBlock($block);
+	});
+}
+
+/**
+ * Automatyczne otwieranie koszyka po dodaniu przez AJAX i inicjalizacja nasłuchu na dodanie do koszyka
+ */
+jQuery(function ($) {
+	// Rejestracja globalnego nasłuchu na zdarzenie dodania do koszyka z WooCommerce
+	$(document.body).on('added_to_cart', function (event, fragments, cart_hash, $button) {
+		// Wyemituj event otwierający dla Alpine (szuflada koszyka)
+		window.dispatchEvent(new CustomEvent('cart-open'));
+	});
+
+	// AJAX do dodawania do koszyka ze strony pojedynczego produktu (Single Product)
+	$(document).on('submit', 'form.cart', function (e) {
+		const $form = $(this);
+		
+		// CAŁKOWITE zabezpieczenie przed przechwytywaniem formularza koszyka (Update Cart)
+		if ($form.hasClass('woocommerce-cart-form') || $form.closest('.woocommerce-cart-form').length) {
+			return;
+		}
+
+		// Nie przechwytujemy, jeśli formularz nie ma przycisku dodawania lub celowo nie wspiera ajaxu (np. zewnętrzne)
+		if ($form.closest('.product').hasClass('product-type-external')) {
+			return;
+		}
+		
+		// Jeśli jest to przycisk dodawania do koszyka
+		const $button = $form.find('.single_add_to_cart_button');
+		if (!$button.length) {
+			return;
+		}
+
+		e.preventDefault();
+
+		if ($button.hasClass('loading')) {
+			return;
+		}
+
+		$button.removeClass('added').addClass('loading');
+
+		// Tworzymy FormData ze wszystkimi polami z formularza (w tym warianty, ilość itp.)
+		const formData = new FormData($form[0]);
+		
+		// Dodaje wartość name i value przycisku submit, ponieważ FormData ich domyślnie nie pobiera dla elementu button
+		if ($button.attr('name') && $button.attr('value')) {
+			formData.append($button.attr('name'), $button.attr('value'));
+		} else {
+			formData.append('add-to-cart', $form.find('[name="add-to-cart"]').val() || $button.val());
+		}
+
+		$.ajax({
+			type: 'POST',
+			url: window.location.href, // Wysyłamy na ten sam URL, WooCommerce obsłuży tradycyjne dodanie, ale my je przechwycimy
+			data: formData,
+			contentType: false,
+			processData: false,
+			success: function (response) {
+				// Po dodaniu wymuszamy aktualizację fragmentów koszyka WooCommerce
+				$(document.body).trigger('wc_fragment_refresh');
+				
+				// Ręcznie triggerujemy 'added_to_cart' na body, ponieważ przesyłamy formularz sami i oryginalna paczka WooCommerce-AJAX nas nie łapie
+				$(document.body).trigger('added_to_cart', [null, null, $button]);
+
+				// Po pobraniu nowych fragmentów (co wywoła added_to_cart), wyłączamy loading
+				$(document.body).one('removed_from_cart added_to_cart wc_fragments_refreshed wc_fragments_loaded', function() {
+					$button.removeClass('loading').addClass('added');
+				});
+			},
+			error: function () {
+				$button.removeClass('loading');
+			}
+		});
+	});
 });
 
 

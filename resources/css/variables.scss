@@ -360,8 +360,6 @@ body {
 	background: var(--color-gray);
 	  padding: var(--spt) 0 var(--spb);
 
-	
-
 	h1,
 	.text-h1,
 	h2,
@@ -380,18 +378,9 @@ body {
 	i,
 	ul,
 	ul li,
-	a,
 	.accordion-label,
 	.__txt {
 		color: #fff;
-	}
-
-	.btn-primary {
-		background: var(--color-secondary);
-	}
-
-	.btn-primary:hover {
-		background: var(--color-secondary-hover);
 	}
 }
 

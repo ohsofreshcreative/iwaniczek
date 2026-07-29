@@ -18,15 +18,3 @@ $classes = 'btn btn-' . $variant;
 	{{ $slot }}
 </button>
 @endif
-
-<!---
-@if (!empty($what['button']))
-				<x-button
-					:href="$what['button']['url']"
-					variant="secondary"
-					class="mt-6"
-					data-gsap-element="btn">
-					{{ $what['button']['title'] }}
-				</x-button>
-				@endif
-				--->

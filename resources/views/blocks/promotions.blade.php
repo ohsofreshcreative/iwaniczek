@@ -25,10 +25,10 @@
 				@if(!empty($item['image']['url']))
 				style="background-image:url('{{ $item['image']['url'] }}')"
 				@endif>
-<div 
-    class="absolute inset-0 bg-cover bg-center"
-    style="background-image: linear-gradient(90deg, rgba(26, 28, 31, 1) 0%, rgba(26, 28, 31, 0.24) 100%);, url('/image.jpg');">
-</div>
+				<div
+					class="absolute inset-0 bg-cover bg-center"
+					style="background-image: linear-gradient(90deg, rgba(26, 28, 31, 1) 0%, rgba(26, 28, 31, 0.24) 100%);, url('/image.jpg');">
+				</div>
 				<div class="relative z-10">
 					@if (!empty($item['title']))
 					<h3 class="text-h5 mb-2"> {!! wp_kses_post($item['title']) !!}</h3>
@@ -60,10 +60,10 @@
 				@if(!empty($item['image']['url']))
 				style="background-image:url('{{ $item['image']['url'] }}')"
 				@endif>
-<div 
-    class="absolute inset-0 bg-cover bg-center"
-    style="background-image: linear-gradient(90deg, rgba(26, 28, 31, 1) 0%, rgba(26, 28, 31, 0.24) 100%);, url('/image.jpg');">
-</div>
+				<div
+					class="absolute inset-0 bg-cover bg-center"
+					style="background-image: linear-gradient(90deg, rgba(26, 28, 31, 1) 0%, rgba(26, 28, 31, 0.24) 100%);, url('/image.jpg');">
+				</div>
 
 				<div class="relative z-10">
 					@if (!empty($item['title']))

@@ -53,6 +53,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		@include('sections.footer')
 	</div>
 
+    {{-- Załączenie wysuwanego koszyka (Drawer) --}}
+    @if (function_exists('WC'))
+        @include('partials.cart-drawer')
+    @endif
+
 	@php(do_action('get_footer'))
 	@php(wp_footer())
 

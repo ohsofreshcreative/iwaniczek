@@ -26,6 +26,28 @@ use App\Walkers\MobileDropdownWalker;
 		</nav>
 		@endif
 
+			<div class="__action flex items-center gap-4">
+				@if (function_exists('wc_get_page_id'))
+				<a href="{{ get_permalink(wc_get_page_id('myaccount')) }}" class="hover:opacity-80 transition-opacity">
+					<img src="{{ get_template_directory_uri() }}/resources/images/user.svg" alt="Moje konto" />
+				</a>
+				@else
+				<img src="{{ get_template_directory_uri() }}/resources/images/user.svg" alt="Użytkownik" />
+				@endif
+
+				@if (function_exists('WC'))
+				<a href="{{ wc_get_cart_url() }}" @click.prevent="window.dispatchEvent(new CustomEvent('cart-open'))" class="relative hover:opacity-80 transition-opacity cart-custom-location-desktop">
+					<img src="{{ get_template_directory_uri() }}/resources/images/cart.svg" alt="Koszyk" />
+					@if (WC()->cart && WC()->cart->get_cart_contents_count() > 0)
+					<span class="absolute -top-2 -right-2 bg-primary text-secondary text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full cart-count">
+						{{ WC()->cart->get_cart_contents_count() }}
+					</span>
+					@endif
+				</a>
+				@else
+				<img src="{{ get_template_directory_uri() }}/resources/images/cart.svg" alt="Koszyk" />
+				@endif
+			</div>
 	</div>
 
 	<!-- Mobile Header Bar -->
@@ -37,19 +59,33 @@ use App\Walkers\MobileDropdownWalker;
 			<span class="text-lg font-bold">{{ $siteName }}</span>
 			@endif
 		</a>
-		<button
-			@click.stop="mobileOpen = !mobileOpen"
-			class="p-2 primary  rounded-md"
-			aria-expanded="mobileOpen"
-			aria-controls="mobile-menu-panel">
-			<span class="sr-only">Otwórz menu główne</span>
-			<svg x-show="!mobileOpen" class="block w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-				<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-			</svg>
-			<svg x-show="mobileOpen" class="block w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" style="display: none;">
-				<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-			</svg>
-		</button>
+		<div class="flex items-center gap-3">
+			{{-- Mobilna ikonka koszyka ze zdarzeniem otwarcia Drawera --}}
+			@if (function_exists('WC'))
+			<a href="{{ wc_get_cart_url() }}" @click.prevent="window.dispatchEvent(new CustomEvent('cart-open'))" class="relative p-2 text-white hover:opacity-80 transition-opacity cart-custom-location-mobile">
+				<img src="{{ get_template_directory_uri() }}/resources/images/cart.svg" class="w-6 h-6" alt="Koszyk" />
+				@if (WC()->cart && WC()->cart->get_cart_contents_count() > 0)
+				<span class="absolute top-1 right-1 bg-secondary text-primary text-[9px] font-bold w-4.5 h-4.5 flex items-center justify-center rounded-full cart-count">
+					{{ WC()->cart->get_cart_contents_count() }}
+				</span>
+				@endif
+			</a>
+			@endif
+
+			<button
+				@click.stop="mobileOpen = !mobileOpen"
+				class="p-2 primary bg-white rounded-md text-primary"
+				aria-expanded="mobileOpen"
+				aria-controls="mobile-menu-panel">
+				<span class="sr-only">Otwórz menu główne</span>
+				<svg x-show="!mobileOpen" class="block w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+				</svg>
+				<svg x-show="mobileOpen" class="block w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" style="display: none;">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+				</svg>
+			</button>
+		</div>
 	</div>
 
 	<!-- Mobile Menu Panel -->
@@ -91,7 +127,7 @@ use App\Walkers\MobileDropdownWalker;
 			</nav>
 			@endif
 
-	
+
 		</div>
 
 	</div>

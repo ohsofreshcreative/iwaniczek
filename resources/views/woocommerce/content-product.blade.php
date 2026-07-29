@@ -5,7 +5,7 @@ remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_l
 @endphp
 
 @if (!empty($product))
-<li class="">
+<li class="relative">
 
 	@php do_action('woocommerce_before_shop_loop_item') @endphp
 

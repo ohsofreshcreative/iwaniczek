@@ -365,3 +365,60 @@ add_action('wp_footer', function () {
     </div>
     <?php
 });
+
+
+/*--- DYNAMICZNE FRAGMENTY DLA KOSZYKA (SLAJD DRAWER) ---*/
+
+add_filter('woocommerce_add_to_cart_fragments', function ($fragments) {
+    // 1. Renderujemy ikonę na pulpit z pliku Blade (jeśli chcemy, lub trzymamy prosty kod w filters)
+    ob_start();
+    ?>
+    <a href="<?php echo esc_url(wc_get_cart_url()); ?>" @click.prevent="window.dispatchEvent(new CustomEvent('cart-open'))" class="relative hover:opacity-80 transition-opacity cart-custom-location-desktop">
+        <img src="<?php echo get_template_directory_uri(); ?>/resources/images/cart.svg" alt="Koszyk" />
+        <?php if (WC()->cart && WC()->cart->get_cart_contents_count() > 0) : ?>
+            <span class="absolute -top-2 -right-2 bg-primary text-secondary text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full cart-count">
+                <?php echo WC()->cart->get_cart_contents_count(); ?>
+            </span>
+        <?php endif; ?>
+    </a>
+    <?php
+    $fragments['a.cart-custom-location-desktop'] = ob_get_clean();
+
+    // 2. Renderujemy ikonę na komórkę
+    ob_start();
+    ?>
+    <a href="<?php echo esc_url(wc_get_cart_url()); ?>" @click.prevent="window.dispatchEvent(new CustomEvent('cart-open'))" class="relative p-2 text-white hover:opacity-80 transition-opacity cart-custom-location-mobile">
+        <img src="<?php echo get_template_directory_uri(); ?>/resources/images/cart.svg" class="w-6 h-6" alt="Koszyk" />
+        <?php if (WC()->cart && WC()->cart->get_cart_contents_count() > 0) : ?>
+            <span class="absolute top-1 right-1 bg-secondary text-primary text-[9px] font-bold w-4.5 h-4.5 flex items-center justify-center rounded-full cart-count">
+                <?php echo WC()->cart->get_cart_contents_count(); ?>
+            </span>
+        <?php endif; ?>
+    </a>
+    <?php
+    $fragments['a.cart-custom-location-mobile'] = ob_get_clean();
+
+    // 3. RENDER ZAWARTOSCI SZUFLADY PROSTO Z BLADE! (BEZ ODPALANIA HTML)
+    $fragments['div.cart-drawer-ajax-content'] = '<div class="flex-1 flex flex-col overflow-hidden cart-drawer-ajax-content">' . \Roots\view('partials.cart-drawer-content')->render() . '</div>';
+
+    // 4. Cyferka przy nagłówku Drawera
+    $fragments['span.cart-count-badge'] = '<span class="bg-secondary/15 text-secondary text-xs px-2.5 py-0.5 rounded-full cart-count-badge">' . WC()->cart->get_cart_contents_count() . '</span>';
+
+    return $fragments;
+});
+
+
+/*--- WYKRYWANIE DODANIA DO KOSZYKA (DLA EMBEDDED REFRESH / POST) ---*/
+
+add_action('woocommerce_add_to_cart', function () {
+    if (!defined('JUST_ADDED_TO_CART')) {
+        define('JUST_ADDED_TO_CART', true);
+    }
+}, 10);
+
+
+add_action('wp_enqueue_scripts', function () {
+    if (function_exists('is_woocommerce')) {
+        wp_enqueue_script('wc-cart-fragments');
+    }
+}, 99);

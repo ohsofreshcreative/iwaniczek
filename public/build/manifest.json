@@ -45,7 +45,7 @@
     "src": "editor.deps.json"
   },
   "resources/css/app.css": {
-    "file": "assets/app-Cn6yESAY.css",
+    "file": "assets/app-CzAOUR4i.css",
     "name": "app",
     "names": [
       "app.css"
@@ -63,7 +63,7 @@
     ]
   },
   "resources/css/editor.css": {
-    "file": "assets/editor-BhO0fZaa.css",
+    "file": "assets/editor-BxUWunwW.css",
     "name": "editor",
     "names": [
       "editor.css"
@@ -100,7 +100,7 @@
     "src": "resources/images/s_phone.svg"
   },
   "resources/js/app.js": {
-    "file": "assets/app-j65V74ZU.js",
+    "file": "assets/app-B2Bs71hV.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,

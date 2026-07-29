@@ -25,15 +25,33 @@ $is_hidden = ($max_value && $min_value === $max_value);
         min: {{ $min }}, 
         max: {{ $max }}, 
         step: {{ $step }},
-        decrement() { if (this.value > this.min) this.value = Math.max(this.min, this.value - this.step) },
-        increment() { if (this.value < this.max) this.value = Math.min(this.max, this.value + this.step) }
+        decrement() { 
+            if (this.value > this.min) {
+                this.value = Math.max(this.min, this.value - this.step);
+                this.$nextTick(() => { this.dispatchChange(); });
+            }
+        },
+        increment() { 
+            if (this.value < this.max) {
+                this.value = Math.min(this.max, this.value + this.step);
+                this.$nextTick(() => { this.dispatchChange(); });
+            }
+        },
+        dispatchChange() {
+            // Bezpieczne rozesłanie natywnego zdarzenia change i input, aby WooCommerce JavaScript (jQuery) wiedział, że zmieniła się ilość
+            const input = this.$refs.inputElement || $el.querySelector('input.qty');
+            if (input) {
+                input.dispatchEvent(new Event('input', { bubbles: true }));
+                input.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+        }
     }">
-        <div class="flex items-center border-1 border-secondary overflow-hidden w-fit h-[66px] select-none bg-white">
+        <div class="flex items-center border-1 border-gray-700 overflow-hidden w-fit h-12 select-none bg-secoindary rounded-lg">
             
             {{-- Przycisk Minus --}}
             <button type="button" 
                 @click="decrement()" 
-                class="px-4 py-2 hover:bg-secondary-50 transition-colors text-primary font-bold text-lg leading-none cursor-pointer h-full flex items-center justify-center border-0 bg-transparent min-w-[40px]">
+                class="px-2 py-1 hover:bg-secondary-50 transition-colors text-primary font-bold text-lg leading-none cursor-pointer h-full flex items-center justify-center border-0 bg-transparent min-w-[32px]">
                 −
             </button>
             
@@ -47,7 +65,7 @@ $is_hidden = ($max_value && $min_value === $max_value);
                 max="{{ esc_attr($max_value) }}"
                 name="{{ esc_attr($input_name) }}"
                 x-model.number="value"
-                @input="value = Math.min(max, Math.max(min, parseInt($event.target.value) || min))"
+                @input="dispatchChange()"
             />
             
             {{-- Przycisk Plus --}}
