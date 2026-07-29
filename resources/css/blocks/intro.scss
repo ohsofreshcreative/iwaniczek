@@ -1,5 +1,5 @@
 .b-intro {
-	.__txt{
+	.__txt {
 		p {
 			padding-bottom: 16px;
 			display: inline-block;
@@ -8,9 +8,15 @@
 		p:last-child {
 			margin-bottom: 0 !important;
 		}
-	}}
-
-	.b-intro.section-gray {
-		background: var(--color-gray);
-		padding: var(--spt) 0 var(--spb)!important;
 	}
+	.__features {
+		span{
+			font-weight: 600!important;
+		}
+	}
+}
+
+.b-intro.section-gray {
+	background: var(--color-gray);
+	padding: var(--spt) 0 var(--spb) !important;
+}

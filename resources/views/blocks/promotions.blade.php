@@ -27,7 +27,13 @@
 				@endif>
 				<div
 					class="absolute inset-0 bg-cover bg-center"
-					style="background-image: linear-gradient(90deg, rgba(26, 28, 31, 1) 0%, rgba(26, 28, 31, 0.24) 100%);, url('/image.jpg');">
+					style="background:linear-gradient(
+90deg, 
+    rgba(24, 25, 27, 1) 0%, 
+    rgba(24, 25, 27, 1) 35%, 
+    rgba(24, 25, 27, 0.9) 55%, 
+    rgba(24, 25, 27, 0) 80% 
+  );">
 				</div>
 				<div class="relative z-10">
 					@if (!empty($item['title']))
@@ -62,7 +68,13 @@
 				@endif>
 				<div
 					class="absolute inset-0 bg-cover bg-center"
-					style="background-image: linear-gradient(90deg, rgba(26, 28, 31, 1) 0%, rgba(26, 28, 31, 0.24) 100%);, url('/image.jpg');">
+					style="background:linear-gradient(
+90deg, 
+    rgba(24, 25, 27, 1) 0%, 
+    rgba(24, 25, 27, 1) 35%, 
+    rgba(24, 25, 27, 0.9) 55%, 
+    rgba(24, 25, 27, 0) 80% 
+  );">
 				</div>
 
 				<div class="relative z-10">

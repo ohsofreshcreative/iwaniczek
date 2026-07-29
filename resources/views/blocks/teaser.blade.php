@@ -15,9 +15,15 @@ $sectionClass .= $nomt ? ' !mt-0' : '';
 
 <div 
     class="absolute inset-0 " 
-    style="background: linear-gradient(90deg, rgba(26, 28, 31, 1) 0%, rgba(26, 28, 31, 0.24) 100%);">
+   style="background:linear-gradient(
+90deg, 
+    rgba(24, 25, 27, 0.98) 0%, 
+    rgba(24, 25, 27, 0.98) 35%, 
+    rgba(24, 25, 27, 0.92) 40%, 
+    rgba(24, 25, 27, 0) 80% 
+  );">
 </div>
-		<div class="__inside c-main relative">
+		<div class="__inside  relative">
 			<div class="__content w-full md:max-w-2xl md:px-16 px-0"> 
 				<h3 data-gsap-element="header" class="!text-h6 !color-primary">
 					{!! $g_teaser['header'] !!}
@@ -27,7 +33,7 @@ $sectionClass .= $nomt ? ' !mt-0' : '';
 					{!! $g_teaser['text'] !!}
 				</div>
 
-				<div class="m-btn">
+				<div class="m-btn ">
 					@if (!empty($g_teaser['button']))
 						<x-button
 							:href="$g_teaser['button']['url']"
