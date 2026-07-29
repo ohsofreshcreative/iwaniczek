@@ -145,7 +145,7 @@ $related_query = new WP_Query($related_args);
 @endif
 
 <!-- kontakt -->
-<section data-gsap-anim="section" @if(!empty($section_id)) id="{{ $section_id }}" @endif class="b-contact-block relative -smt text-white{{ $sectionClass }} {{ $section_class }}">
+<section data-gsap-anim="section" class="b-contact-block relative -smt text-white">
     <div class="__wrapper c-main relative z-20">
         @if(is_page('kontakt') && !empty($title))
         <h2 data-gsap-element="txt" class="header-line m-header md:w-1/2 pt-20">
