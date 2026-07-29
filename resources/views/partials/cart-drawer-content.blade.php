@@ -1,9 +1,7 @@
 @if (WC()->cart->is_empty())
     <!-- Stan: Pusty koszyk -->
     <div class="flex-1 flex flex-col items-center justify-center p-8 text-center text-gray-500">
-        <div class="bg-primary rounded-full p-4">
-		<img src="{{ get_template_directory_uri() }}/resources/images/cart.svg" class="w-16 !h-16 opacity-30 mb-4 filter invert" alt="Pusty koszyk" />
-		</div>
+		<img src="{{ get_template_directory_uri() }}/resources/images/cart.svg" class="w-16 !h-16 opacity-30 mb-4" alt="Pusty koszyk" />
         <p class="text-lg font-bold text-primary mb-2">Twój koszyk jest pusty</p>
         <p class="text-sm mb-6 max-w-[250px] mx-auto">Dodaj produkty do koszyka, aby kontynuować zakupy.</p>
         <button @click="open = false" class="bg-white! border-2 border-gray-200 text-primary! hover:bg-gray-100 hover:border-gray-300 transition-colors text-center font-bold py-3 !px-3 rounded-lg text-sm shadow-xs flex items-center justify-center !w-full !mt-6">
