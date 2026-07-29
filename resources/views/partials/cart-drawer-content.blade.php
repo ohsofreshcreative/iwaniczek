@@ -4,7 +4,7 @@
         <img src="{{ get_template_directory_uri() }}/resources/images/cart.svg" class="w-16 h-16 opacity-30 mb-4 filter invert" alt="Pusty koszyk" />
         <p class="text-lg font-bold text-primary mb-2">Twój koszyk jest pusty</p>
         <p class="text-sm mb-6 max-w-[250px] mx-auto">Dodaj produkty do koszyka, aby kontynuować zakupy.</p>
-        <button @click="open = false" class="btn btn-secondary !py-3 !px-8 text-sm">
+        <button @click="open = false" class="bg-white! border-2 border-gray-200 text-primary! hover:bg-gray-100 hover:border-gray-300 transition-colors text-center font-bold py-3 !px-3 rounded-lg text-sm shadow-xs flex items-center justify-center !w-full">
             Kontynuuj zakupy
         </button>
     </div>

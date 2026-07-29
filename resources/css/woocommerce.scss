@@ -3,6 +3,15 @@
 	display: none !important;
 }
 
+span.onsale {
+	right: -16px !important;
+	left: auto !important;
+	background-color: var(--color-primary) !important;
+	padding: 4px 16px;
+	border: 2px dashed var(--color-secondary) !important;
+	border-radius:16px !important;
+}
+
 /*--- !SINGLE PRODUCT - PRICE POSITION ---*/
 
 /* Dla produktów z wariantami: ukryj zakres cen pod tytułem (<p class="price">).
@@ -333,14 +342,6 @@ ins {
 
 	.b-contact-block .__wrapper {
 		padding: 0 !important;
-	}
-
-	span.onsale {
-		right: 16px !important;
-		left: auto !important;
-		background-color: var(--color-primary) !important;
-		padding: 4px 16px;
-		border: 2px dashed var(--color-secondary) !important;
 	}
 
 	bdi,
@@ -1150,8 +1151,8 @@ input[type="number"] {
 /*--- STYLIZACJA STRONY PODZIĘKOWANIA (THANK YOU PAGE) DLA CIEMNEGO TŁA ---*/
 .woocommerce-order {
 
-	 ul.order_details::after,
-	 ul.order_details::before {
+	ul.order_details::after,
+	ul.order_details::before {
 		display: none !important;
 	}
 
