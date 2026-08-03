@@ -11,7 +11,7 @@ export default defineConfig(({ command, mode }) => {
   return {
     server: {
       host: 'iwaniczek.local',
-      port: 6001,
+      port: 6002,
       strictPort: true,
       cors: true,
       proxy: {
@@ -23,7 +23,7 @@ export default defineConfig(({ command, mode }) => {
       hmr: {
         protocol: 'ws',
         host: 'iwaniczek.local',
-        port: 6001,
+        port: 6002,
       },
     },
 

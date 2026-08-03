@@ -58,6 +58,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         @include('partials.cart-drawer')
     @endif
 
+	@include('partials.bubble')
+
 	@php(do_action('get_footer'))
 	@php(wp_footer())
 

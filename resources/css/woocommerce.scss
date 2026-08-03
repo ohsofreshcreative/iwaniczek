@@ -9,7 +9,7 @@ span.onsale {
 	background-color: var(--color-primary) !important;
 	padding: 4px 16px;
 	border: 2px dashed var(--color-secondary) !important;
-	border-radius:16px !important;
+	border-radius: 16px !important;
 }
 
 /*--- !SINGLE PRODUCT - PRICE POSITION ---*/
@@ -332,6 +332,32 @@ ins {
 
 /*--- !PRODUCT PAGE ---*/
 
+.delivery-time {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 0px;
+	font-size: 16px;
+	width: 100%;
+	color: #FFF;
+	font-weight: 600 !important;
+
+	.delivery-time__label {
+		font-weight: 600 !important;
+	}
+
+	&__label {
+		font-weight: 600 !important;
+		color: #FFF;
+		white-space: nowrap;
+	}
+
+	&__value {
+		color: #FFF;
+		font-weight: 600;
+	}
+}
+
 .single-product {
 	.price-label {
 		color: #FFF;
@@ -376,12 +402,18 @@ input[type="number"] {
 	flex-wrap: wrap !important;
 }
 
-.woocommerce div.product .woocommerce-variation-add-to-cart,
-.woocommerce [id^="product-"] form.cart {
+.woocommerce div.product .woocommerce-variation-add-to-cart {
 	display: flex !important;
 	align-items: center !important;
 	gap: 16px !important;
 	flex-wrap: wrap !important;
+}
+
+.woocommerce [id^="product-"] form.cart {
+	/* display: flex !important;
+	align-items: center !important;
+	gap: 16px !important;
+	flex-wrap: wrap !important; */
 }
 
 .woocommerce div.product form.cart .quantity,

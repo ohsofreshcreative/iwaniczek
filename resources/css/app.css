@@ -186,6 +186,7 @@
 }
 
 @import '../css/variables.scss';
+@import '../css/mega-menu.scss';
 
 @import 'swiper/css';
 @import 'swiper/css/navigation';

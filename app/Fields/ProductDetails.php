@@ -13,6 +13,10 @@ class ProductDetails extends Field
 
         $product
             ->setLocation('post_type', '==', 'product')
+            ->addText('delivery_time', [
+                'label'        => 'Czas realizacji',
+                'instructions' => 'Np. "3-5 dni roboczych", "do 2 tygodni"',
+            ])
             ->addRepeater('product_info_items', [
                 'label'        => 'Dodatkowe informacje',
                 'layout'       => 'row',

@@ -1,0 +1,37 @@
+.megamenu-content {
+	.level-3-list {
+		display: none;
+
+		&.active {
+			display: block;
+		}
+	}
+
+	.level-2-item {
+		&.active {
+			background-color: rgba(255, 255, 255, 0.06);
+		}
+
+		&.active::after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			right: -1.75rem;
+			transform: translateY(-50%);
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 8px 0 8px 10px;
+			border-color: transparent transparent transparent rgb(var(--primary));
+		}
+	}
+
+	.active-level-2-image {
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+		}
+	}
+}

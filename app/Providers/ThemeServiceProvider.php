@@ -45,6 +45,14 @@ class ThemeServiceProvider extends SageServiceProvider
 					'capability' => 'edit_posts',
 					'redirect'   => false,
 				]);
+
+				acf_add_options_page([
+					'page_title' => 'Dymek (pływający)',
+					'menu_title' => 'Dymek',
+					'menu_slug'  => 'bubble',
+					'capability' => 'edit_posts',
+					'redirect'   => false,
+				]);
 				
 			}
 		});

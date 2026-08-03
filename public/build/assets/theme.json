@@ -1539,6 +1539,16 @@
           "color": "rgb(var(--s-600))"
         },
         {
+          "name": "Secondary (800)",
+          "slug": "secondary-800",
+          "color": "rgb(var(--s-800))"
+        },
+        {
+          "name": "Secondary (900)",
+          "slug": "secondary-900",
+          "color": "rgb(var(--s-900))"
+        },
+        {
           "name": "Accent (Dark)",
           "slug": "accent-dark",
           "color": "rgb(var(--accent-dark))"

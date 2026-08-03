@@ -9,7 +9,7 @@ use App\Walkers\MobileDropdownWalker;
 	<div class=" items-center justify-between hidden h-full py-4 px-12 mx-auto lg:flex border-b  border-dashed border-secondary-400">
 		<a class="brand shrink-0" href="{{ home_url('/') }}">
 			@if ($logo)
-			<img src="{{ $logo['url'] }}" alt="{{ $logo['alt'] ?? 'Logo' }}" class="w-auto h-12">
+			<img src="{{ $logo['url'] }}" alt="{{ $logo['alt'] ?? 'Logo' }}" class="w-auto !h-8 md:!h-10">
 			@else
 			<span class="text-xl font-bold">{{ $siteName }}</span>
 			@endif
@@ -54,7 +54,7 @@ use App\Walkers\MobileDropdownWalker;
 	<div class="flex items-center justify-between p-4 mobile-menu fixed-top lg:hidden">
 		<a class="brand shrink-0" href="{{ home_url('/') }}">
 			@if ($logo)
-			<img src="{{ $logo['url'] }}" alt="{{ $logo['alt'] ?? 'Logo' }}" class="w-auto h-12">
+			<img src="{{ $logo['url'] }}" alt="{{ $logo['alt'] ?? 'Logo' }}" class="w-auto !h-8 md:!h-10">
 			@else
 			<span class="text-lg font-bold">{{ $siteName }}</span>
 			@endif

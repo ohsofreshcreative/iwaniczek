@@ -24,9 +24,7 @@
 		</div>
 	</div>
 	<div class="__wrapper c-main flex flex-col-reverse md:grid md:grid-cols-2 mt-10 relative gap-10 z-30 pt-40 md:min-h-[650px]">
-
-
-		<div class="__box flex flex-col items-start md:self-end">
+		<div data-gsap-element="box" class="__box flex flex-col items-start md:self-end">
 			<div class="video-wrapper relative w-[200px] h-[130px] rounded-2xl overflow-hidden  border border-zinc-600 shadow-lg mb-[-100px] ml-25 z-40">
 				@if (!empty($g_hero['video']))
 				<div class="video-wrapper relative h-full w-full">
@@ -61,8 +59,7 @@
 					@if (!empty($g_hero['button2']))
 					<a
 						href="{{ $g_hero['button2']['url'] }}"
-						class="btn btn-black hero-btn-small"
-						data-gsap-element="btn">
+						class="btn btn-black hero-btn-small">
 						{{ $g_hero['button2']['title'] }}
 					</a>
 					@endif
@@ -83,6 +80,7 @@
 		</div>
 	</div>
 </section>
+
 <!-- popup  -->
 <div
 	id="heroVideoModal"

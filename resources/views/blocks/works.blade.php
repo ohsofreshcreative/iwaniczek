@@ -25,7 +25,7 @@ $sectionClass .= ' ' . $background;
 					<button
 						class="portfolio-filter active btn-outline-primary btn whitespace-nowrap"
 						data-filter="all">
-						Wszystkie realizacje
+						Najważniejsze realizacje
 					</button>
 				</div>
 				@foreach($categories as $category)

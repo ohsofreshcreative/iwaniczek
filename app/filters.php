@@ -16,6 +16,17 @@ add_filter('excerpt_more', function () {
 });
 
 
+add_action('woocommerce_before_add_to_cart_button', function () {
+    $delivery_time = get_field('delivery_time');
+    if (! $delivery_time) {
+        return;
+    }
+    echo '<div class="delivery-time">';
+    echo '<span class="delivery-time__label">' . esc_html__('Czas realizacji:', 'sage') . '</span>';
+    echo '<span class="delivery-time__value">' . esc_html($delivery_time) . '</span>';
+    echo '</div>';
+});
+
 add_action('pre_get_posts', function ($q) {
   if (is_admin() || !$q->is_main_query()) {
     return;
@@ -114,7 +125,7 @@ add_action('woocommerce_single_product_summary', function () {
 
     $current_id = $product->get_id();
 
-    echo '<div class="product-upsells-inline border-b border-primary-lighter pb-8 mb-8">';
+    echo '<div class="product-upsells-inline border-b border-dashed border-primary/20 pb-8 mb-8 w-full">';
     echo '<p class="pa_rozmiar block !font-bold pb-2">' . esc_html__('Wybierz kolor:', 'sage') . '</p>';
     echo '<ul class="flex flex-wrap gap-3 list-none !m-0 !p-0">';
 
