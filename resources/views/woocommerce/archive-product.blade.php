@@ -112,6 +112,29 @@ $description = ($term instanceof WP_Term) ? term_description($term->term_id, $te
 
 	{{-- Produkty --}}
 	<div class="__products min-w-0">
+
+		{{-- Przyciski podkategorii --}}
+		@if ($term instanceof WP_Term)
+		@php
+		$subcats = get_terms([
+			'taxonomy'   => 'product_cat',
+			'parent'     => $term->term_id,
+			'hide_empty' => false,
+			'orderby'    => 'menu_order',
+			'order'      => 'ASC',
+		]);
+		@endphp
+		@if (!empty($subcats) && !is_wp_error($subcats))
+		<div class="flex flex-wrap gap-3 mb-16">
+			@foreach($subcats as $subcat)
+			<a href="{{ esc_url(get_term_link($subcat)) }}"
+				class="px-4 py-3 border border-secondary-300 text-base font-semibold text-white hover:bg-primary hover:border-primary transition-colors duration-200 no-underline">
+				{{ $subcat->name }}
+			</a>
+			@endforeach
+		</div>
+		@endif
+		@endif
 		@if (woocommerce_product_loop())
 		@php
 		do_action('woocommerce_before_shop_loop');
