@@ -19,23 +19,23 @@ $sectionClass .= $nomt ? ' !mt-0' : '';
 	background-size: cover;
 	background-position: center;
 ">
-<div class="__inside c-main relative">
-    <div class="__content absolute bottom-10 max-w-2xl md:w-1/2 flex flex-col  ">
-        @if (!empty($g_top['header']))
-            <h1 data-gsap-element="header" class="text-white">
-                {{ $g_top['header'] }}
-            </h1>
-        @endif
+		<div class="__inside c-main relative">
+			<div class="__content absolute bottom-10 max-w-2xl md:w-1/2 flex flex-col  ">
+				@if (!empty($g_top['header']))
+				<h1 data-gsap-element="header" class="text-white">
+					{{ $g_top['header'] }}
+				</h1>
+				@endif
 
-        <div data-gsap-element="txt" class="__txt order2 text-white mb-8">
-            {!! $g_top['text'] !!}
-        </div>
+				<div data-gsap-element="txt" class="__txt order2 text-white mb-8">
+					{!! $g_top['text'] !!}
+				</div>
 
-      <a href="#banner-next"
-                    aria-label="Przewiń do następnej sekcji"
-                    class="js-banner-next bg-primary h-16 w-16 flex items-center justify-center pointer-events-auto  cursor-pointer transition-all duration-400 animate-bounce ">
-                    <x-icon.arrow-bottom class="__arrow text-black w-4 h-auto overflow-visible" />
-                </a>
-    </div>
-</div>
+				<a data-gsap-element="arrow" href="#banner-next"
+					aria-label="Przewiń do następnej sekcji"
+					class="js-banner-next bg-primary h-16 w-16 flex items-center justify-center pointer-events-auto cursor-pointer">
+					<x-icon.arrow-bottom class="__arrow text-black w-4 h-auto overflow-visible" />
+				</a>
+			</div>
+		</div>
 </section>
