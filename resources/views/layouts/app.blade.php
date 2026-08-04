@@ -15,18 +15,23 @@
 
 	{{-- Styles --}}
 	@vite(['resources/css/app.css', 'resources/js/app.js'])
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+		integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+		integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 
 <body @php(body_class())>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M5TV295L"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M5TV295L"
+			height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
 	@php(wp_body_open())
+
+	<div class="so__icons flex-col gap-4 hidden sm:flex">
+		<a target="_blank" href="https://www.facebook.com/profile.php?id=100063531341816"><img src="{{ get_template_directory_uri() }}/resources/images/fb.svg" /></a>
+		<a target="_blank" href="https://www.instagram.com/iwaniczek.eu/"><img src="{{ get_template_directory_uri() }}/resources/images/ig.svg" /></a>
+	</div>
 
 	<div id="app">
 
@@ -53,10 +58,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		@include('sections.footer')
 	</div>
 
-    {{-- Załączenie wysuwanego koszyka (Drawer) --}}
-    @if (function_exists('WC'))
-        @include('partials.cart-drawer')
-    @endif
+	{{-- Załączenie wysuwanego koszyka (Drawer) --}}
+	@if (function_exists('WC'))
+	@include('partials.cart-drawer')
+	@endif
 
 	@include('partials.bubble')
 

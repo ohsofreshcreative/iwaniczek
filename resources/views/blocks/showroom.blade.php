@@ -52,17 +52,31 @@ if (!empty($background) && $background !== 'none') {
 
                             @if(($slide['type'] ?? 'image') === 'video')
 
-                                <video
-                                    controls
-                                    playsinline
-                                    preload="metadata"
-                                    class="w-full h-full object-cover"
-                                >
-                                    <source 
-                                        src="{{ $slide['video']['url'] }}" 
-                                        type="{{ $slide['video']['mime_type'] ?? 'video/mp4' }}"
+                                @php
+                                    preg_match('/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $slide['video_url'] ?? '', $yt);
+                                    $yt_id = $yt[1] ?? '';
+                                @endphp
+                                @if($yt_id)
+                                    <button
+                                        type="button"
+                                        class="yt-thumb-trigger w-full h-full relative cursor-pointer group"
+                                        data-yt-id="{{ $yt_id }}"
                                     >
-                                </video>
+                                        <img
+                                            src="https://img.youtube.com/vi/{{ $yt_id }}/maxresdefault.jpg"
+                                            onerror="this.src='https://img.youtube.com/vi/{{ $yt_id }}/hqdefault.jpg'"
+                                            alt=""
+                                            class="w-full h-full object-cover"
+                                        >
+                                        <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors duration-300">
+                                            <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                                                <svg class="w-6 h-6 text-white translate-x-0.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                                    <path d="M8 5v14l11-7z"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </button>
+                                @endif
 
                             @else
 

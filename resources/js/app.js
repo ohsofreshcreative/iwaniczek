@@ -3,6 +3,15 @@
 
 import Alpine from 'alpinejs';
 
+// Zapobiega "widmowemu" hoverowi po przeładowaniu strony (np. po kliknięciu
+// w link w mega menu) — kursor stoi w miejscu, więc mouseenter odpala się
+// od razu na nowej stronie, mimo że użytkownik nie ruszył myszką.
+window.__mouseHasMoved = false;
+// Delay to skip synthetic mousemove events browsers fire during DOM load under cursor
+setTimeout(() => {
+	window.addEventListener('mousemove', () => { window.__mouseHasMoved = true; }, { once: true });
+}, 300);
+
 import baguetteBox from 'baguettebox.js';
 
 // Importy zasobów dla Vite (np. obrazy, fonty)
@@ -212,7 +221,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	megamenuContents.forEach(megamenu => {
 		const level2Items = megamenu.querySelectorAll('.level-2-item');
 		const level3Lists = megamenu.querySelectorAll('.level-3-list');
-		const imageContainer = megamenu.querySelector('.active-level-2-image');
 
 		level2Items.forEach(item => {
 			item.addEventListener('mouseenter', () => {
@@ -231,20 +239,8 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 
 				// Zaktualizuj obrazek
-				const imageUrl = item.dataset.imageSrc;
-				if (imageUrl && imageContainer) {
-					// Sprawdź, czy obrazek już istnieje, aby uniknąć przeładowywania
-					let img = imageContainer.querySelector('img');
-					if (!img) {
-						img = document.createElement('img');
-						imageContainer.appendChild(img);
-					}
-					img.src = imageUrl;
-					img.alt = ''; // Dodaj pusty alt dla dostępności
-					img.className = 'menu-image'; // Upewnij się, że obrazek ma odpowiednie style
-				} else if (imageContainer) {
-					imageContainer.innerHTML = ''; // Wyczyść, jeśli nie ma obrazka
-				}
+				// (obrazek usunięty z megamenu)
+
 			});
 		});
 

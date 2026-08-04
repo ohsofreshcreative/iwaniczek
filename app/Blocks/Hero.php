@@ -44,26 +44,29 @@ class Hero extends Block
 				'return_format' => 'array',
 				'preview_size' => 'thumbnail',
 			])
-			->addWysiwyg('title', [
+			->addText('subtitle', [
 				'label' => 'Tytuł',
+			])
+			->addWysiwyg('title', [
+				'label' => 'Nagłówek',
 				'tabs' => 'all', // 'visual', 'text', 'all'
 				'toolbar' => 'full', // 'basic', 'full'
 				'media_upload' => true,
 			])
-		
+
 			->addLink('button1', [
 				'label' => 'Przycisk #1',
 				'return_format' => 'array',
 			])
-		
-				->addFile('video', [
+
+			->addFile('video', [
 				'label' => 'Wideo',
 				'return_format' => 'url',
 			])
 			->addText('video_title', [
 				'label' => 'Tytuł nad wideo',
 			])
-				->addLink('button2', [
+			->addLink('button2', [
 				'label' => 'Przycisk #2',
 				'return_format' => 'array',
 			])

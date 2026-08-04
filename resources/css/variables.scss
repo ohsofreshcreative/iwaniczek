@@ -842,9 +842,6 @@ h6,
     }
 }
 
-
-
-
 .btn-outline-secondary {
 	background-color: transparent;
 	border-color: var(--color-secondary);
@@ -892,6 +889,13 @@ h6,
 }
 
 /*--- !MENU  ---*/
+
+.so__icons {
+	position: fixed;
+	bottom: 32px;
+	left: 16px;
+	z-index: 999999999999;
+}
 
 .fixed-top {
 	height: var(--menu-height);

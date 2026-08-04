@@ -30,6 +30,9 @@ $hero_source = ($term instanceof WP_Term)
 : (function_exists('wc_get_page_id') && wc_get_page_id('shop') > 0 ? wc_get_page_id('shop') : null);
 
 $hero_image = $hero_source ? get_field('hero_image', $hero_source) : null;
+if (empty($hero_image['url'])) {
+    $hero_image = get_field('hero_image', get_term(28, 'product_cat'));
+}
 $hero_header_custom = $hero_source ? get_field('hero_header', $hero_source) : null;
 $hero_icon = $hero_source ? get_field('icon', $hero_source) : null;
 $content_top = $hero_source ? get_field('content_top', $hero_source) : null;

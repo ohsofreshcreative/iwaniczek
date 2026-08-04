@@ -3,7 +3,44 @@ use App\Walkers\DropdownWalker;
 use App\Walkers\MobileDropdownWalker;
 @endphp
 
-<header x-data="{ mobileOpen: false }" class="fixed top-0 left-0 right-0 z-50 masthead fixed-top bg-transparent ">
+<script>
+	document.addEventListener('alpine:init', () => {
+		const _sc = @json(['ajaxUrl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('live_search')]);
+		Alpine.data('headerData', () => ({
+			mobileOpen: false,
+			searchOpen: false,
+			searchQuery: '',
+			searchResults: [],
+			searchLoading: false,
+			openSearch() {
+				this.searchOpen = true;
+				this.$nextTick(() => this.$refs.searchInput?.focus());
+			},
+			closeSearch() {
+				this.searchOpen = false;
+				this.searchQuery = '';
+				this.searchResults = [];
+			},
+			async performSearch() {
+				if (this.searchQuery.length < 2) {
+					this.searchResults = [];
+					return;
+				}
+				this.searchLoading = true;
+				try {
+					const r = await fetch(_sc.ajaxUrl + '?action=live_search_products&q=' + encodeURIComponent(this.searchQuery) + '&nonce=' + _sc.nonce);
+					this.searchResults = await r.json();
+				} catch (e) {
+					this.searchResults = [];
+				} finally {
+					this.searchLoading = false;
+				}
+			}
+		}));
+	});
+</script>
+
+<header x-data="headerData()" @keydown.escape.window="closeSearch()" class="fixed top-0 left-0 right-0 z-50 masthead fixed-top bg-transparent">
 
 	<!-- Desktop Header -->
 	<div class=" items-center justify-between hidden h-full py-4 px-12 mx-auto lg:flex border-b  border-dashed border-secondary-400">
@@ -26,28 +63,77 @@ use App\Walkers\MobileDropdownWalker;
 		</nav>
 		@endif
 
-			<div class="__action flex items-center gap-4">
-				@if (function_exists('wc_get_page_id'))
-				<a href="{{ get_permalink(wc_get_page_id('myaccount')) }}" class="hover:opacity-80 transition-opacity">
-					<img src="{{ get_template_directory_uri() }}/resources/images/user.svg" alt="Moje konto" />
-				</a>
-				@else
-				<img src="{{ get_template_directory_uri() }}/resources/images/user.svg" alt="Użytkownik" />
-				@endif
-
-				@if (function_exists('WC'))
-				<a href="{{ wc_get_cart_url() }}" @click.prevent="window.dispatchEvent(new CustomEvent('cart-open'))" class="relative hover:opacity-80 transition-opacity cart-custom-location-desktop">
-					<img src="{{ get_template_directory_uri() }}/resources/images/cart.svg" alt="Koszyk" />
-					@if (WC()->cart && WC()->cart->get_cart_contents_count() > 0)
-					<span class="absolute -top-2 -right-2 bg-primary text-secondary text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full cart-count">
-						{{ WC()->cart->get_cart_contents_count() }}
-					</span>
-					@endif
-				</a>
-				@else
-				<img src="{{ get_template_directory_uri() }}/resources/images/cart.svg" alt="Koszyk" />
-				@endif
+		<div class="__action flex items-center gap-4">
+			<div class="relative">
+				<button @click="searchOpen ? closeSearch() : openSearch()" class="hover:opacity-80 transition-opacity block" aria-label="Szukaj">
+					<img class="!w-8 !h-8" src="{{ get_template_directory_uri() }}/resources/images/search.svg" alt="Szukaj" />
+				</button>
+				<!-- Search dropdown -->
+				<div
+					x-show="searchOpen"
+					x-transition:enter="transition ease-out duration-200"
+					x-transition:enter-start="opacity-0 scale-95"
+					x-transition:enter-end="opacity-100 scale-100"
+					x-transition:leave="transition ease-in duration-150"
+					x-transition:leave-start="opacity-100 scale-100"
+					x-transition:leave-end="opacity-0 scale-95"
+					class="absolute top-full right-0 mt-3 w-96 bg-secondary-800 rounded-lg shadow-2xl z-50 p-4"
+					style="display:none;">
+					<div class="relative">
+						<input
+							x-ref="searchInput"
+							x-model="searchQuery"
+							@input.debounce.300ms="performSearch()"
+							type="search"
+							placeholder="Szukaj produktów..."
+							class="w-full bg-white text-secondary rounded px-4 py-2.5 pr-9 text-base !font-medium focus:outline-none" />
+						<div x-show="searchLoading" class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" style="display:none;">
+							<svg class="w-4 h-4 animate-spin text-secondary-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+								<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+								<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 22 6.477 22 12h-4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+							</svg>
+						</div>
+					</div>
+					<div x-show="searchResults.length > 0" class="mt-3" style="display:none;">
+						<template x-for="product in searchResults" :key="product.id">
+							<a :href="product.url" @click="closeSearch()" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/10 transition-colors rounded border-b border-white/10 last:border-0">
+								<img x-show="product.thumbnail" :src="product.thumbnail" :alt="product.title" class="w-10 h-10 object-cover rounded shrink-0" />
+								<div class="min-w-0">
+									<div class="!font-medium text-white truncate" x-text="product.title"></div>
+									<div class="text-primary !font-medium mt-0.5" x-show="product.price" x-text="product.price"></div>
+								</div>
+							</a>
+						</template>
+						<a :href="'/?s=' + encodeURIComponent(searchQuery) + '&post_type=product'" @click="closeSearch()" class="block mt-2 py-2 text-xs text-center text-white/60 hover:text-white transition-colors">
+							Zobacz wszystkie wyniki →
+						</a>
+					</div>
+					<div x-show="searchQuery.length >= 2 && !searchLoading && searchResults.length === 0" class="mt-3 text-sm text-white/60 text-center py-2" style="display:none;">
+						Brak wyników dla „<span x-text="searchQuery"></span>“
+					</div>
+				</div>
 			</div>
+			@if (function_exists('wc_get_page_id'))
+			<a href="{{ get_permalink(wc_get_page_id('myaccount')) }}" class="hover:opacity-80 transition-opacity !w-8 !h-8">
+				<img class="!w-8 !h-8" src="{{ get_template_directory_uri() }}/resources/images/user.svg" alt="Moje konto" />
+			</a>
+			@else
+			<img class="w-8 h-8" src="{{ get_template_directory_uri() }}/resources/images/user.svg" alt="Użytkownik" />
+			@endif
+
+			@if (function_exists('WC'))
+			<a href="{{ wc_get_cart_url() }}" @click.prevent="window.dispatchEvent(new CustomEvent('cart-open'))" class="__cart relative hover:opacity-80 transition-opacity cart-custom-location-desktop">
+				<img class="!w-8 !h-8" src="{{ get_template_directory_uri() }}/resources/images/cart.svg" alt="Koszyk" />
+				@if (WC()->cart && WC()->cart->get_cart_contents_count() > 0)
+				<span class="absolute -top-2 -right-2 bg-primary text-secondary text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full cart-count">
+					{{ WC()->cart->get_cart_contents_count() }}
+				</span>
+				@endif
+			</a>
+			@else
+			<img class="!w-8 !h-8" src="{{ get_template_directory_uri() }}/resources/images/cart.svg" alt="Koszyk" />
+			@endif
+		</div>
 	</div>
 
 	<!-- Mobile Header Bar -->
@@ -60,17 +146,27 @@ use App\Walkers\MobileDropdownWalker;
 			@endif
 		</a>
 		<div class="flex items-center gap-3">
+			@if (function_exists('wc_get_page_id'))
+			<a href="{{ get_permalink(wc_get_page_id('myaccount')) }}" class="hover:opacity-80 transition-opacity">
+				<img class="!w-7 !h-7" src="{{ get_template_directory_uri() }}/resources/images/user.svg" alt="Moje konto" />
+			</a>
+			@endif
+
 			{{-- Mobilna ikonka koszyka ze zdarzeniem otwarcia Drawera --}}
 			@if (function_exists('WC'))
-			<a href="{{ wc_get_cart_url() }}" @click.prevent="window.dispatchEvent(new CustomEvent('cart-open'))" class="relative p-2 text-white hover:opacity-80 transition-opacity cart-custom-location-mobile">
-				<img src="{{ get_template_directory_uri() }}/resources/images/cart.svg" class="w-6 h-6" alt="Koszyk" />
+			<a href="{{ wc_get_cart_url() }}" @click.prevent="window.dispatchEvent(new CustomEvent('cart-open'))" class="relative hover:opacity-80 transition-opacity cart-custom-location-mobile">
+				<img src="{{ get_template_directory_uri() }}/resources/images/cart.svg" class="!w-7 !h-7" alt="Koszyk" />
 				@if (WC()->cart && WC()->cart->get_cart_contents_count() > 0)
-				<span class="absolute top-1 right-1 bg-secondary text-primary text-[9px] font-bold w-4.5 h-4.5 flex items-center justify-center rounded-full cart-count">
+				<span class="absolute -top-2 -right-2 bg-primary text-secondary text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full cart-count">
 					{{ WC()->cart->get_cart_contents_count() }}
 				</span>
 				@endif
 			</a>
 			@endif
+
+			<button @click="searchOpen ? closeSearch() : openSearch()" class="hover:opacity-80 transition-opacity" aria-label="Szukaj">
+				<img class="!w-7 !h-7" src="{{ get_template_directory_uri() }}/resources/images/search.svg" alt="Szukaj" />
+			</button>
 
 			<button
 				@click.stop="mobileOpen = !mobileOpen"
@@ -85,6 +181,48 @@ use App\Walkers\MobileDropdownWalker;
 					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
 				</svg>
 			</button>
+		</div>
+	</div>
+
+	<!-- Mobile Search Panel -->
+	<div
+		x-show="searchOpen"
+		x-transition:enter="transition ease-out duration-200"
+		x-transition:enter-start="opacity-0 -translate-y-2"
+		x-transition:enter-end="opacity-100 translate-y-0"
+		x-transition:leave="transition ease-in duration-150"
+		x-transition:leave-start="opacity-100 translate-y-0"
+		x-transition:leave-end="opacity-0 -translate-y-2"
+		class="lg:hidden absolute top-full left-0 right-0 bg-secondary shadow-xl z-50 p-4"
+		style="display:none;">
+		<div class="relative">
+			<input
+				x-model="searchQuery"
+				@input.debounce.300ms="performSearch()"
+				type="search"
+				placeholder="Szukaj produktów..."
+				class="w-full bg-white text-secondary rounded px-4 py-2.5 pr-9 text-sm focus:outline-none"
+			/>
+			<div x-show="searchLoading" class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" style="display:none;">
+				<svg class="w-4 h-4 animate-spin text-secondary-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 22 6.477 22 12h-4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+			</div>
+		</div>
+		<div x-show="searchResults.length > 0" class="mt-3" style="display:none;">
+			<template x-for="product in searchResults" :key="product.id">
+				<a :href="product.url" @click="closeSearch()" class="flex items-center gap-3 px-2 py-2.5 hover:bg-white/10 transition-colors rounded border-b border-white/10 last:border-0">
+					<img x-show="product.thumbnail" :src="product.thumbnail" :alt="product.title" class="w-10 h-10 object-cover rounded shrink-0" />
+					<div class="min-w-0">
+						<div class="font-medium text-white text-sm truncate" x-text="product.title"></div>
+						<div class="text-xs text-primary font-semibold mt-0.5" x-show="product.price" x-text="product.price"></div>
+					</div>
+				</a>
+			</template>
+			<a :href="'/?s=' + encodeURIComponent(searchQuery) + '&post_type=product'" @click="closeSearch()" class="block mt-2 py-2 text-base text-center text-white/80 hover:text-white transition-colors">
+				Zobacz wszystkie wyniki →
+			</a>
+		</div>
+		<div x-show="searchQuery.length >= 2 && !searchLoading && searchResults.length === 0" class="mt-3 text-sm text-white/60 text-center py-2" style="display:none;">
+			Brak wyników dla „<span x-text="searchQuery"></span>"
 		</div>
 	</div>
 
@@ -131,4 +269,10 @@ use App\Walkers\MobileDropdownWalker;
 		</div>
 
 	</div>
+
+	<!-- Backdrop closes search on outside click; teleported to body to escape header's z-50 stacking context -->
+	<template x-teleport="body">
+		<div x-show="searchOpen" @click="closeSearch()" class="fixed inset-0 z-40" style="display:none;"></div>
+	</template>
+
 </header>

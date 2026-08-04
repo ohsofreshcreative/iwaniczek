@@ -12,6 +12,14 @@ class DropdownWalker extends Walker_Nav_Menu
     /** Contact data for the megamenu footer. */
     private $contact;
 
+    /** Buffered HTML for all level-3 lists; flushed into level-3-container after megamenu-col-left closes. */
+    private string $level3_buffer = '';
+
+    /** Items HTML for the currently-open level-3 list, built before the <ul> tag is known. */
+    private string $current_level3_items = '';
+    private string $current_level3_parent_id = '';
+    private int    $current_level3_count = 0;
+
     public function start_lvl(&$output, $depth = 0, $args = null)
     {
         // depth=0: open the mega menu panel (left col + image placeholder + footer)
@@ -21,18 +29,20 @@ class DropdownWalker extends Walker_Nav_Menu
             $output .= '<div x-show="open" x-cloak @click.away="open = false"'
                 . ' x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"'
                 . ' x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2"'
-                . ' class="megamenu-content absolute left-1/2 top-full -translate-x-1/2 mt-4 w-[min(92vw,1180px)] bg-secondary text-white shadow-2xl rounded-2xl overflow-hidden z-30" style="display: none;">';
+                . ' class="megamenu-content absolute left-1/2 top-full -translate-x-1/2 w-[min(94vw,860px)] xl:w-[min(90vw,1180px)] max-w-[calc(100vw-2rem)] bg-secondary-800 text-white shadow-2xl rounded-2xl overflow-hidden z-30" style="display: flex;">';
 
-            $output .= '<div class="megamenu-body relative flex flex-wrap gap-x-12 p-10">';
-            $output .= '<div class="megamenu-col-left relative w-64 shrink-0">';
+            $output .= '<div class="megamenu-body relative flex flex-wrap gap-x-6 xl:gap-x-12 p-6 xl:p-10">';
+            $output .= '<div class="megamenu-col-left relative w-44 xl:w-64 shrink-0">';
             $output .= '<ul class="level-2-list divide-y divide-secondary-400/60">';
 
             return;
         }
 
-        // depth=1: level-3 list, bound to its parent via matching HTML id / data-parent-id
+        // depth=1: buffered – output after megamenu-col-left closes
         if ($depth === 1) {
-            $output .= '<ul data-parent-id="' . esc_attr($this->current_level2_id) . '" class="level-3-list absolute top-0 left-full ml-12 w-64 space-y-4">';
+            $this->current_level3_parent_id = $this->current_level2_id;
+            $this->current_level3_items     = '';
+            $this->current_level3_count     = 0;
             return;
         }
 
@@ -46,7 +56,7 @@ class DropdownWalker extends Walker_Nav_Menu
 
         // depth=0: top-level nav item
         if ($depth === 0 && $has_children) {
-            $output .= '<li x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false" class="relative ' . esc_attr(implode(' ', $item->classes)) . '">';
+            $output .= '<li x-data="{ open: false }" @mouseenter="window.__mouseHasMoved && (open = true)" @mouseleave="open = false" class="' . esc_attr(implode(' ', $item->classes)) . '">';
             $output .= '<a href="' . esc_attr($item->url) . '" class="inline-flex items-center gap-x-1 text-lg font-medium text-white font-header">';
             $output .= esc_html($item->title);
             $output .= '<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>';
@@ -56,28 +66,26 @@ class DropdownWalker extends Walker_Nav_Menu
 
         // depth=1: left-column mega menu category
         if ($depth === 1) {
-            $image    = function_exists('get_field') ? get_field('megamenu_image', $item->ID) : null;
-            $imageUrl = !empty($image['sizes']['medium']) ? $image['sizes']['medium'] : ($image['url'] ?? '');
-
             // Store the FULL HTML id so data-parent-id matches item.id in JS
             if ($has_children) {
                 $this->current_level2_id = 'menu-item-' . $item->ID;
             }
 
-            $output .= '<li id="menu-item-' . esc_attr($item->ID) . '" data-image-src="' . esc_attr($imageUrl) . '" class="level-2-item relative -mx-4 px-4 py-4 cursor-pointer transition-colors duration-200 hover:bg-white/5">';
+            $output .= '<li id="menu-item-' . esc_attr($item->ID) . '" class="level-2-item relative -mx-4 px-4 py-4 cursor-pointer transition-colors duration-200 hover:bg-white/5">';
             $output .= '<a href="' . esc_attr($item->url) . '" class="block text-lg text-white">';
             $output .= esc_html($item->title);
             $output .= '</a>';
             return;
         }
 
-        // depth=2: sub-category link
+        // depth=2: sub-category link – buffered into current_level3_items
         if ($depth === 2) {
-            $output .= '<li' . $li_classes . '>';
-            $output .= '<a href="' . esc_attr($item->url) . '" class="flex items-center gap-x-2 text-lg text-white hover:text-primary-300 transition-colors duration-200">';
-            $output .= '<svg class="w-3 h-3 text-primary shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg>';
-            $output .= esc_html($item->title);
-            $output .= '</a>';
+            $this->current_level3_count++;
+            $this->current_level3_items .= '<li' . $li_classes . '>';
+            $this->current_level3_items .= '<a href="' . esc_attr($item->url) . '" class="flex items-center gap-x-2 text-lg text-white hover:text-primary-300 transition-colors duration-200">';
+            $this->current_level3_items .= '<svg class="w-3 h-3 text-primary shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg>';
+            $this->current_level3_items .= esc_html($item->title);
+            $this->current_level3_items .= '</a>';
             return;
         }
 
@@ -90,26 +98,43 @@ class DropdownWalker extends Walker_Nav_Menu
 
     public function end_el(&$output, $item, $depth = 0, $args = null)
     {
+        if ($depth === 2) {
+            $this->current_level3_items .= "</li>\n";
+            return;
+        }
         $output .= "</li>\n";
     }
 
     public function end_lvl(&$output, $depth = 0, $args = null)
     {
+        if ($depth === 1) {
+            $cols = $this->current_level3_count > 8 ? ' cols-2' : '';
+            $this->level3_buffer .= '<ul data-parent-id="' . esc_attr($this->current_level3_parent_id) . '" class="level-3-list w-max' . $cols . '">';
+            $this->level3_buffer .= $this->current_level3_items;
+            $this->level3_buffer .= '</ul>';
+            $this->current_level3_items = '';
+            $this->current_level3_count = 0;
+            return;
+        }
+
         if ($depth === 0) {
             $output .= '</ul>'; // .level-2-list
             $output .= '</div>'; // .megamenu-col-left
 
-            $output .= '<div class="megamenu-col-middle-spacer w-64 shrink-0"></div>';
-            $output .= '<div class="active-level-2-image relative shrink-0 ml-12 w-[22rem] h-72 rounded-2xl overflow-hidden bg-secondary-800"></div>';
+            $output .= '<div class="level-3-container flex-1 flex items-center pl-26">';
+            $output .= $this->level3_buffer;
+            $output .= '</div>';
+            $this->level3_buffer = '';
 
             $output .= '</div>'; // .megamenu-body
 
             $this->contact = $this->contact ?? (function_exists('get_field') ? get_field('g_contact_info', 'option') : []);
             if (!empty($this->contact) && (!empty($this->contact['phone']) || !empty($this->contact['mail']))) {
-                $output .= '<div class="megamenu-footer flex items-center justify-between gap-6 px-10 py-6 border-t border-secondary-400/60">';
-                $output .= '<div class="flex items-center gap-6 flex-wrap">';
+                $output .= '<div class="megamenu-footer flex flex-row items-center justify-between gap-6 px-10 py-6 border-t border-secondary-400/60">';
+                $output .= '<div class="flex flex-row items-center justify-between gap-6 w-full">';
                 $output .= '<span class="text-secondary-100">Masz pytania? Skontaktuj się z nami</span>';
 
+                $output .= '<div class="flex flex-row items-center gap-6">';
                 if (!empty($this->contact['phone'])) {
                     $output .= '<a href="tel:' . esc_attr(str_replace(' ', '', $this->contact['phone'])) . '" class="flex items-center gap-2 text-white hover:text-primary-300 transition-colors duration-200">';
                     $output .= '<svg class="w-4 h-4 text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>';
@@ -126,6 +151,8 @@ class DropdownWalker extends Walker_Nav_Menu
 
                 $output .= '</div>';
                 $output .= '</div>'; // .megamenu-footer
+
+                $output .= '</div>';
             }
 
             $output .= '</div>'; // .megamenu-content

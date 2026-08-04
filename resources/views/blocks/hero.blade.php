@@ -67,6 +67,11 @@
 			</div>
 		</div>
 		<div class="__content relative flex flex-col justify-center text-left md:text-right w-full md:self-start mb-10 md:mb-0">
+		@if(!empty($g_hero['subtitle']))
+			<span data-gsap-element="subtitle" class="text-white text-h7 mb-4 md:mb-6 block">
+				{{ $g_hero['subtitle'] }}
+			</span>
+		@endif
 			<h1 data-gsap-element="header" class="text-white !font-bold">
 				{!! wp_kses_post($g_hero['title']) !!}
 			</h1>

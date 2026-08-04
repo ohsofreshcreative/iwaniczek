@@ -7,9 +7,10 @@ span.onsale {
 	right: -16px !important;
 	left: auto !important;
 	background-color: var(--color-primary) !important;
-	padding: 4px 16px;
+	padding: 12px 16px !important;
 	border: 2px dashed var(--color-secondary) !important;
 	border-radius: 16px !important;
+	line-height: 1 !important;
 }
 
 /*--- !SINGLE PRODUCT - PRICE POSITION ---*/
@@ -1507,6 +1508,277 @@ input[type="number"] {
 				border-bottom: 1px solid #E2E8F0 !important;
 				padding: 10px 20px !important;
 			}
+		}
+	}
+}
+
+/*--- !WOOCOMMERCE MY ACCOUNT ---*/
+
+.woocommerce-account .woocommerce {
+	display: flex !important;
+	gap: 32px !important;
+	align-items: start !important;
+
+	/* neutralise WooCommerce clearfix that breaks grid */
+	&::before,
+	&::after {
+		display: none !important;
+		content: none !important;
+	}
+
+	@media (max-width: 767px) {
+		flex-direction: column !important;
+		gap: 24px !important;
+	}
+
+	h2 {
+		font-size: 24px !important;
+	}
+	.addresses .title .edit {
+		color: var(--color-primary) !important;
+		font-weight: 600 !important;
+		text-decoration: underline !important;
+	}
+}
+
+.woocommerce-MyAccount-navigation {
+	background: #1a1a1a !important;
+	border: 1px solid #2d2d2d !important;
+	border-radius: 12px !important;
+	overflow: hidden !important;
+	position: sticky !important;
+	top: 120px !important;
+	width: 24% !important;
+
+	.woocommerce-MyAccount-navigation-link--downloads {
+		display: none !important;
+	}
+
+	ul {
+		list-style: none !important;
+		margin: 0 !important;
+		padding: 8px 0 !important;
+	}
+
+	li {
+		margin: 0 !important;
+		border-bottom: 1px solid #262626 !important;
+
+		&:last-child {
+			border-bottom: none !important;
+		}
+	}
+
+	a {
+		display: flex !important;
+		align-items: center !important;
+		padding: 13px 20px !important;
+		color: #a3a3a3 !important;
+		font-size: 14px !important;
+		font-weight: 500 !important;
+		text-decoration: none !important;
+		transition: color 0.2s, background 0.2s !important;
+
+		&:hover {
+			color: #ffffff !important;
+			background: #262626 !important;
+		}
+	}
+
+	.woocommerce-MyAccount-navigation-link.is-active a {
+		color: var(--color-primary) !important;
+		background: rgba(249, 152, 0, 0.08) !important;
+		font-weight: 600 !important;
+		border-left: 3px solid var(--color-primary) !important;
+	}
+
+	.woocommerce-MyAccount-navigation-link--customer-logout a:hover {
+		color: #ff6b6b !important;
+		background: #2d1515 !important;
+	}
+}
+
+.woocommerce-MyAccount-content {
+	background: #1a1a1a !important;
+	border: 1px solid #2d2d2d !important;
+	border-radius: 12px !important;
+	padding: 32px !important;
+	color: #e5e5e5 !important;
+
+	@media (max-width: 767px) {
+		padding: 20px !important;
+	}
+
+	p {
+		color: #a3a3a3 !important;
+		font-size: 15px !important;
+		line-height: 1.7 !important;
+		margin-bottom: 16px !important;
+
+		strong {
+			color: #ffffff !important;
+			font-weight: 600 !important;
+		}
+
+		a {
+			color: var(--color-primary) !important;
+			text-decoration: none !important;
+			font-weight: 500 !important;
+
+			&:hover {
+				text-decoration: underline !important;
+			}
+		}
+	}
+
+	h2,
+	h3 {
+		color: #ffffff !important;
+		font-weight: 700 !important;
+		margin-bottom: 20px !important;
+		padding-bottom: 12px !important;
+		border-bottom: 2px solid #2d2d2d !important;
+	}
+
+	table.woocommerce-orders-table,
+	table.shop_table {
+		width: 100% !important;
+		background: #131313 !important;
+		border: 1px solid #2d2d2d !important;
+		border-radius: 10px !important;
+		overflow: hidden !important;
+		border-collapse: separate !important;
+		border-spacing: 0 !important;
+		margin-bottom: 0 !important;
+
+		thead th {
+			background: #262626 !important;
+			color: #ffffff !important;
+			font-size: 12px !important;
+			text-transform: uppercase !important;
+			letter-spacing: 0.05em !important;
+			padding: 14px 18px !important;
+			border-bottom: 1px solid #2d2d2d !important;
+			font-weight: 700 !important;
+		}
+
+		tbody tr:hover td {
+			background: #1d1d1d !important;
+		}
+
+		tbody td {
+			padding: 14px 18px !important;
+			color: #a3a3a3 !important;
+			font-size: 14px !important;
+			vertical-align: middle !important;
+			border-bottom: 1px solid #262626 !important;
+
+			a {
+				font-weight: 600 !important;
+				text-decoration: none !important;
+
+				&:hover {
+					text-decoration: underline !important;
+				}
+			}
+		}
+
+		mark.order-status {
+			background: #262626 !important;
+			color: #e5e5e5 !important;
+			border-radius: 6px !important;
+			padding: 4px 10px !important;
+			font-size: 12px !important;
+			font-weight: 600 !important;
+
+			&.completed,
+			&.processing {
+				background: rgba(16, 185, 129, 0.15) !important;
+				color: #10b981 !important;
+			}
+
+			&.on-hold,
+			&.pending {
+				background: rgba(249, 152, 0, 0.12) !important;
+				color: var(--color-primary) !important;
+			}
+
+			&.cancelled,
+			&.failed,
+			&.refunded {
+				background: rgba(239, 68, 68, 0.12) !important;
+				color: #ef4444 !important;
+			}
+		}
+	}
+
+	.woocommerce-Address {
+		background: #131313 !important;
+		border: 1px solid #2d2d2d !important;
+		border-radius: 10px !important;
+		padding: 24px !important;
+
+		.woocommerce-Address-title h3 {
+			border: none !important;
+			padding: 0 !important;
+		}
+
+		address {
+			color: #a3a3a3 !important;
+			font-style: normal !important;
+			line-height: 1.8 !important;
+		}
+	}
+
+	.woocommerce-EditAccountForm,
+	.woocommerce-address-fields {
+		label {
+			color: #a3a3a3 !important;
+			font-size: 13px !important;
+			font-weight: 600 !important;
+			text-transform: uppercase !important;
+			letter-spacing: 0.04em !important;
+		}
+
+		input[type="text"],
+		input[type="email"],
+		input[type="password"],
+		input[type="tel"],
+		select,
+		textarea {
+			background: #131313 !important;
+			border: 1px solid #2d2d2d !important;
+			border-radius: 8px !important;
+			color: #e5e5e5 !important;
+			padding: 12px 16px !important;
+			font-size: 15px !important;
+
+			&:focus {
+				border-color: var(--color-primary) !important;
+				outline: none !important;
+				box-shadow: 0 0 0 3px rgba(249, 152, 0, 0.12) !important;
+			}
+
+			&::placeholder {
+				color: #434343 !important;
+			}
+		}
+	}
+
+	.button,
+	button[type="submit"] {
+		background: var(--color-primary) !important;
+		color: #1d1d1d !important;
+		border: none !important;
+		border-radius: 8px !important;
+		padding: 12px 28px !important;
+		font-weight: 700 !important;
+		font-size: 14px !important;
+		transition: background 0.2s !important;
+		cursor: pointer !important;
+
+		&:hover {
+			background: #d07f00 !important;
 		}
 	}
 }

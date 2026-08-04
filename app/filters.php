@@ -384,8 +384,8 @@ add_filter('woocommerce_add_to_cart_fragments', function ($fragments) {
     // 1. Renderujemy ikonę na pulpit z pliku Blade (jeśli chcemy, lub trzymamy prosty kod w filters)
     ob_start();
     ?>
-    <a href="<?php echo esc_url(wc_get_cart_url()); ?>" @click.prevent="window.dispatchEvent(new CustomEvent('cart-open'))" class="relative hover:opacity-80 transition-opacity cart-custom-location-desktop">
-        <img src="<?php echo get_template_directory_uri(); ?>/resources/images/cart.svg" alt="Koszyk" />
+    <a href="<?php echo esc_url(wc_get_cart_url()); ?>" @click.prevent="window.dispatchEvent(new CustomEvent('cart-open'))" class="__cart relative hover:opacity-80 transition-opacity cart-custom-location-desktop">
+        <img class="!w-8 !h-8" src="<?php echo get_template_directory_uri(); ?>/resources/images/cart.svg" alt="Koszyk" />
         <?php if (WC()->cart && WC()->cart->get_cart_contents_count() > 0) : ?>
             <span class="absolute -top-2 -right-2 bg-primary text-secondary text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full cart-count">
                 <?php echo WC()->cart->get_cart_contents_count(); ?>
@@ -398,10 +398,10 @@ add_filter('woocommerce_add_to_cart_fragments', function ($fragments) {
     // 2. Renderujemy ikonę na komórkę
     ob_start();
     ?>
-    <a href="<?php echo esc_url(wc_get_cart_url()); ?>" @click.prevent="window.dispatchEvent(new CustomEvent('cart-open'))" class="relative p-2 text-white hover:opacity-80 transition-opacity cart-custom-location-mobile">
-        <img src="<?php echo get_template_directory_uri(); ?>/resources/images/cart.svg" class="w-6 h-6" alt="Koszyk" />
+    <a href="<?php echo esc_url(wc_get_cart_url()); ?>" @click.prevent="window.dispatchEvent(new CustomEvent('cart-open'))" class="relative hover:opacity-80 transition-opacity cart-custom-location-mobile">
+        <img src="<?php echo get_template_directory_uri(); ?>/resources/images/cart.svg" class="!w-7 !h-7" alt="Koszyk" />
         <?php if (WC()->cart && WC()->cart->get_cart_contents_count() > 0) : ?>
-            <span class="absolute top-1 right-1 bg-secondary text-primary text-[9px] font-bold w-4.5 h-4.5 flex items-center justify-center rounded-full cart-count">
+            <span class="absolute -top-2 -right-2 bg-primary text-secondary text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full cart-count">
                 <?php echo WC()->cart->get_cart_contents_count(); ?>
             </span>
         <?php endif; ?>
@@ -426,6 +426,49 @@ add_action('woocommerce_add_to_cart', function () {
         define('JUST_ADDED_TO_CART', true);
     }
 }, 10);
+
+
+/*--- LIVE SEARCH PRODUCTS ---*/
+
+function iwaniczek_live_search_products(): void {
+    check_ajax_referer('live_search', 'nonce');
+
+    $q = sanitize_text_field(wp_unslash($_GET['q'] ?? ''));
+    if (mb_strlen($q) < 2) {
+        wp_send_json([]);
+        return;
+    }
+
+    $products = wc_get_products([
+        's'      => $q,
+        'limit'  => 6,
+        'status' => 'publish',
+    ]);
+
+    $results = array_map(function ($product) {
+        $img_id    = $product->get_image_id();
+        $thumbnail = $img_id ? wp_get_attachment_image_url($img_id, 'thumbnail') : wc_placeholder_img_src('thumbnail');
+
+        $min_price = $product->is_type('variable')
+            ? $product->get_variation_price('min')
+            : $product->get_price();
+        $price_formatted = $min_price !== '' && $min_price !== null
+            ? html_entity_decode(wp_strip_all_tags(wc_price((float) $min_price)), ENT_QUOTES | ENT_HTML5, 'UTF-8')
+            : '';
+
+        return [
+            'id'        => $product->get_id(),
+            'title'     => $product->get_name(),
+            'url'       => get_permalink($product->get_id()),
+            'thumbnail' => $thumbnail ?: '',
+            'price'     => $price_formatted,
+        ];
+    }, $products);
+
+    wp_send_json($results);
+}
+add_action('wp_ajax_live_search_products', __NAMESPACE__ . '\\iwaniczek_live_search_products');
+add_action('wp_ajax_nopriv_live_search_products', __NAMESPACE__ . '\\iwaniczek_live_search_products');
 
 
 add_action('wp_enqueue_scripts', function () {

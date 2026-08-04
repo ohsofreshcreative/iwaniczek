@@ -80,10 +80,9 @@ class Showroom extends Block
 				],
 			])
 
-			->addFile('video', [
-				'label' => 'Film (MP4)',
-				'return_format' => 'array',
-				'mime_types' => 'mp4',
+			->addText('video_url', [
+				'label' => 'Link YouTube',
+				'placeholder' => 'https://www.youtube.com/watch?v=...',
 				'conditional_logic' => [
 					[
 						[
