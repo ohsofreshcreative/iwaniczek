@@ -304,6 +304,24 @@ ins {
 }
 
 /*--- !SHOP PAGE ---*/
+.__products {
+	width: 100% !important;
+	h2.woocommerce-loop-category__title {
+		font-size:24px !important;
+		.count {
+			display: none !important;
+		}
+	}
+	.product-category.product {
+		width:100% !important;
+		margin:0 !important;
+		img {
+			max-width:144px !important;
+			max-height:144px !important;
+			height:144px !important;
+		}
+	}
+}
 
 .woocommerce .products ul::after,
 .woocommerce .products ul::before,
@@ -1534,6 +1552,7 @@ input[type="number"] {
 	h2 {
 		font-size: 24px !important;
 	}
+
 	.addresses .title .edit {
 		color: var(--color-primary) !important;
 		font-weight: 600 !important;
