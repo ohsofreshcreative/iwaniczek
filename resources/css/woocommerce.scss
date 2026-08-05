@@ -921,6 +921,10 @@ input[type="number"] {
 
 /*--- !CHECKOUT ---*/
 
+.woocommerce-cart, .woocommerce-checkout {
+	color:#FFF !important;
+}
+
 .checkout.woocommerce-checkout,
 .woocommerce-cart-form,
 .cart-collaterals {
