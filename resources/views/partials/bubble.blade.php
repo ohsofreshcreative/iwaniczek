@@ -15,7 +15,7 @@
 >
     {{-- Karta rozwinięta --}}
     <div
-        class="fixed bottom-7 right-7 z-10 max-sm:bottom-4 max-sm:right-4 bg-primary rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.18)] w-[300px] max-[400px]:w-[calc(100vw-2rem)] overflow-hidden flex flex-col origin-bottom-right"
+        class="fixed bottom-7 right-7 z-99 max-sm:bottom-4 max-sm:right-4 bg-primary rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.18)] w-[300px] max-[400px]:w-[calc(100vw-2rem)] overflow-hidden flex flex-col origin-bottom-right"
         x-show="!collapsed"
         x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 scale-95"
