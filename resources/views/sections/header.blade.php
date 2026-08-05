@@ -125,7 +125,7 @@ use App\Walkers\MobileDropdownWalker;
 			<a href="{{ wc_get_cart_url() }}" @click.prevent="window.dispatchEvent(new CustomEvent('cart-open'))" class="__cart relative hover:opacity-80 transition-opacity cart-custom-location-desktop">
 				<img class="!w-8 !h-8" src="{{ get_template_directory_uri() }}/resources/images/cart.svg" alt="Koszyk" />
 				@if (WC()->cart && WC()->cart->get_cart_contents_count() > 0)
-				<span class="absolute -top-2 -right-2 bg-primary text-secondary text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full cart-count">
+            <span class="absolute -top-2 -right-2 bg-primary text-white text-[12px] !font-bold w-5 h-5 flex items-center justify-center rounded-full cart-count">
 					{{ WC()->cart->get_cart_contents_count() }}
 				</span>
 				@endif
@@ -157,7 +157,7 @@ use App\Walkers\MobileDropdownWalker;
 			<a href="{{ wc_get_cart_url() }}" @click.prevent="window.dispatchEvent(new CustomEvent('cart-open'))" class="relative hover:opacity-80 transition-opacity cart-custom-location-mobile">
 				<img src="{{ get_template_directory_uri() }}/resources/images/cart.svg" class="!w-7 !h-7" alt="Koszyk" />
 				@if (WC()->cart && WC()->cart->get_cart_contents_count() > 0)
-				<span class="absolute -top-2 -right-2 bg-primary text-secondary text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full cart-count">
+            <span class="absolute -top-2 -right-2 bg-primary text-white text-[12px] !font-bold w-5 h-5 flex items-center justify-center rounded-full cart-count">
 					{{ WC()->cart->get_cart_contents_count() }}
 				</span>
 				@endif
