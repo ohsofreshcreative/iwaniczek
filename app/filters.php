@@ -387,7 +387,7 @@ add_filter('woocommerce_add_to_cart_fragments', function ($fragments) {
     <a href="<?php echo esc_url(wc_get_cart_url()); ?>" @click.prevent="window.dispatchEvent(new CustomEvent('cart-open'))" class="__cart relative hover:opacity-80 transition-opacity cart-custom-location-desktop">
         <img class="!w-8 !h-8" src="<?php echo get_template_directory_uri(); ?>/resources/images/cart.svg" alt="Koszyk" />
         <?php if (WC()->cart && WC()->cart->get_cart_contents_count() > 0) : ?>
-            <span class="absolute -top-2 -right-2 bg-primary text-white text-[12px] !font-bold w-5 h-5 flex items-center justify-center rounded-full cart-count">
+            <span class="absolute -top-2 -right-2 bg-primary !text-white text-[12px] !font-bold w-5 h-5 flex items-center justify-center rounded-full cart-count">
                 <?php echo WC()->cart->get_cart_contents_count(); ?>
             </span>
         <?php endif; ?>
@@ -401,7 +401,7 @@ add_filter('woocommerce_add_to_cart_fragments', function ($fragments) {
     <a href="<?php echo esc_url(wc_get_cart_url()); ?>" @click.prevent="window.dispatchEvent(new CustomEvent('cart-open'))" class="relative hover:opacity-80 transition-opacity cart-custom-location-mobile">
         <img src="<?php echo get_template_directory_uri(); ?>/resources/images/cart.svg" class="!w-7 !h-7" alt="Koszyk" />
         <?php if (WC()->cart && WC()->cart->get_cart_contents_count() > 0) : ?>
-            <span class="absolute -top-2 -right-2 bg-primary text-white text-[12px] !font-bold w-5 h-5 flex items-center justify-center rounded-full cart-count">
+            <span class="absolute -top-2 -right-2 bg-primary !text-white text-[12px] !font-bold w-5 h-5 flex items-center justify-center rounded-full cart-count">
                 <?php echo WC()->cart->get_cart_contents_count(); ?>
             </span>
         <?php endif; ?>
